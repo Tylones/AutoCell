@@ -9,7 +9,7 @@ class AutoCell
 
 public:
     QVector<QVector<int> > getMatrice() const;
-    AutoCell(int width = 10,int height=10, int cellWidth=10, int cellHeight=10,int cellStates=2,int currentState=0);
+    AutoCell(int width = 10, int height=10, int cellWidth=10, int cellHeight=10, int cellStates=2, int nb_neighborhood=3);
 
     void setMatrice(const QVector<QVector<int> > &value);
 

@@ -1,7 +1,11 @@
 #include "autocell.h"
 
-AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int currentState):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(currentState),matrice(QVector< QVector <int> >(width, QVector<int>(height))),neighborhood(QVector< QVector <int> >(2, QVector<int>(1)))
+AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),matrice(QVector< QVector <int> >(width, QVector<int>(height))),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
 {
+    if(height>1)
+    {
+        neighborhood.push_back(QVector<int>(nb_neighborhood));
+    }
 
 }
 

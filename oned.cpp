@@ -51,8 +51,6 @@ QVector < QVector < QVector <int>> >OneD::makeRules(){
 
 }
 
-
-
 QVector<int> OneD::getRules() const
 {
     return rule;
@@ -63,60 +61,61 @@ void OneD::setRules(const int n)
     rule = OneD::rulesTab[n][0];
 }
 
-void OneD::changeCellState(QPoint point){
-
-   if(point.x()/cellWidth < width && point.y()/cellHeight < height)
-   {
-    if( matrice[(point.x())/cellWidth][(point.y())/cellHeight]==1)
-       matrice[(point.x())/cellWidth][(point.y())/cellHeight]=0;
-    else
-       matrice[(point.x())/cellWidth][(point.y())/cellHeight]=1;
-   }
-}
-
-
-OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r):AutoCell(width,1,cellWidth,cellHeight,cellStates),rule(QVector<int>(8))
+OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood):AutoCell(width,1,cellWidth,cellHeight,cellStates,nb_neighborhood),rule(QVector<int>(8))
 {
     for(int i=0;i<8;i++)
     rule[7-i]=rulesTab[r][i][0];
 
-
     neighborhood[0][0]=-1;
-    neighborhood[1][0]=1;
+    neighborhood[1][0]=0;
+    neighborhood[2][0]=1;
 }
 
 void OneD::nextState()
 {
-        for (int i=0; i<width; i++) {
-            int index;
-            if(i<1)
-                index=matrice[i][currentState]*2+matrice[i+1][currentState];
+    for (int i=0; i<width; i++)
+    {
+        int index;
 
+        if(i<1)
+            index=matrice[i+neighborhood[1][0]][currentState]*2+matrice[i+neighborhood[2][0]][currentState];
 
-             else if(i>=(width-2))
-                index =matrice[i-1][currentState]*4+matrice[i][currentState]*2;
+        else if(i>=width-2)
+            index =matrice[i+neighborhood[0][0]][currentState]*4+matrice[i+neighborhood[1][0]][currentState]*2;
 
-              else
-                 index=matrice[i-1][currentState]*4+matrice[i][currentState]*2+matrice[i+1][currentState];
+        else
+            index=matrice[i+neighborhood[0][0]][currentState]*4+matrice[i+neighborhood[1][0]][currentState]*2+matrice[i+neighborhood[2][0]][currentState];
 
-            matrice[i].push_back(rule[index]);
+        matrice[i].push_back(rule[index]);
+    }
 
-        }
-        currentState++;
-        height++;
+    currentState++;
+    height++;
 
-        if(matrice[1][currentState]==1)
-        {
+    if(matrice[1][currentState]==1)
+    {
+        width++;
+        matrice.push_front(QVector <int>(height));
+    }
 
-                width++;
-
-            matrice.push_front(QVector <int>(height));
-              }
-
-
-            if(matrice[width-1][currentState]==1)
-            { width++;
-                 matrice.push_back(QVector <int>(height));
-            }
+    if(matrice[width-1][currentState]==1)
+    {
+        width++;
+        matrice.push_back(QVector <int>(height));
+    }
 
 }
+
+void OneD::changeCellState(const QPoint point)
+{
+
+   if(point.x()/cellWidth < width && point.y()/cellHeight < height)
+   {
+       if(matrice[(point.x())/cellWidth][(point.y())/cellHeight]==1)
+           matrice[(point.x())/cellWidth][(point.y())/cellHeight]=0;
+
+       else
+           matrice[(point.x())/cellWidth][(point.y())/cellHeight]=1;
+   }
+}
+

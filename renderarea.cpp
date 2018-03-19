@@ -1,14 +1,11 @@
 #include "renderarea.h"
 
 RenderArea::RenderArea(QWidget *parent)
-    : QWidget(parent),autoCell(20),zoom(1)
+    : QWidget(parent),autoCell(10),zoom(1)
 {
-
+   // OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(play()));
-
-
-
 }
 
 QSize RenderArea::sizeHint() const
@@ -21,12 +18,10 @@ QSize RenderArea::minimumSizeHint() const
     return QSize(400,200);
 }
 
-
-
 void RenderArea::drawOneD(QPainter &painter)
 {
 
-QVector< QVector<int> > matrice=autoCell.getMatrice();
+    QVector< QVector<int> > matrice=autoCell.getMatrice();
     QVector< QVector<int> >::iterator row;
     QVector<int>::iterator col;
     for (row = matrice.begin(); row != matrice.end(); row++) {
@@ -44,15 +39,15 @@ void RenderArea::drawOneD(QPainter &painter,int state)
 {
 
     QVector< QVector<int> > matrice=autoCell.getMatrice();
-        QVector< QVector<int> >::iterator row;
-        QVector<int>::iterator col;
-        for (row = matrice.begin(); row != matrice.end(); row++) {
-            col = row->begin()+state;
-                painter.drawRect((row-matrice.begin())*10,(col-row->begin())*10,10,10);
-                if(*col==1)
-                    painter.fillRect((row-matrice.begin())*10,(col-row->begin())*10,10,10,Qt::SolidPattern);
+    QVector< QVector<int> >::iterator row;
+    QVector<int>::iterator col;
+    for (row = matrice.begin(); row != matrice.end(); row++) {
+        col = row->begin()+state;
+            painter.drawRect((row-matrice.begin())*10,(col-row->begin())*10,10,10);
+            if(*col==1)
+                painter.fillRect((row-matrice.begin())*10,(col-row->begin())*10,10,10,Qt::SolidPattern);
 
-        }
+    }
 
 
 
