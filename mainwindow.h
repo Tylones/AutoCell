@@ -20,6 +20,9 @@ public:
 private:
     Ui::MainWindow *ui;
 
+public slots:
+    void pause();
+
 };
 
 #endif // MAINWINDOW_H

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/icons">
+        <file>Resources/pause.png</file>
+        <file>Resources/play.png</file>
+        <file>Resources/next.png</file>
+    </qresource>
+</RCC>

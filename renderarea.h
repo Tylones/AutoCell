@@ -22,9 +22,11 @@ public:
 
 public slots:
      void next();
-     void pause();
      void play();
+     void playIsChecked(bool checked);
 
+signals:
+     void pause();
 
 
 protected:

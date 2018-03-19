@@ -13,12 +13,12 @@ RenderArea::RenderArea(QWidget *parent)
 
 QSize RenderArea::sizeHint() const
 {
-    return QSize(autoCell.getWidth()*autoCell.getCellWidth()*zoom, autoCell.getHeight()*autoCell.getCellHeight()*zoom);
+    return QSize(width(),height());
 }
 
 QSize RenderArea::minimumSizeHint() const
 {
-    return QSize(autoCell.getWidth()*10,autoCell.getHeight()*10);
+    return QSize(400,200);
 }
 
 
@@ -64,11 +64,13 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 {
 
 QPainter painter(this);
+//if()
 if(autoCell.getWidth()>autoCell.getHeight())
     zoom=(double)width()/(double)(autoCell.getWidth()*autoCell.getCellWidth());
-else
+if(autoCell.getHeight()*autoCell.getCellHeight()*zoom>height())
     zoom=(double)height()/(double)(autoCell.getHeight()*autoCell.getCellHeight());
 
+qDebug() << width() << "//"<< height() << "//" << autoCell.getCellWidth() <<"//" <<autoCell.getWidth() << zoom;
     painter.scale(zoom,zoom);
     drawOneD(painter);
 }
@@ -76,21 +78,34 @@ else
 
 void RenderArea::next()
 {
-    for(int i =0;i<1000;i++)
+    for(int i =0;i<1;i++)
     autoCell.nextState();
     update();
 }
 
-void RenderArea::pause()
-{
-    timer->stop();
-}
+
 
 void RenderArea::play()
 {
     timer->start(10);
     autoCell.nextState();
     update();
+    if(autoCell.getWidth()>1920)
+    {
+        timer->stop();
+        emit pause();
+    }
+}
+
+void RenderArea::playIsChecked(bool checked)
+{
+    if(checked)
+    {
+        play();
+    }
+    else{
+        timer->stop();
+    }
 }
 
 

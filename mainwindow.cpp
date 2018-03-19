@@ -17,10 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(ui->scrollArea);
 
 
-    QObject::connect(ui->actionplay, &QAction::triggered,renderArea , &RenderArea::play);
-    QObject::connect(ui->actionpause, &QAction::triggered,renderArea , &RenderArea::pause);
+    QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
     QObject::connect(ui->actionnext, &QAction::triggered,renderArea , &RenderArea::next);
+    QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
 
+
+}
+
+void MainWindow::pause()
+{
+    ui->actionplay->setChecked(false);
 }
 
 MainWindow::~MainWindow()
