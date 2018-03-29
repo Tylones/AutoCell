@@ -5,6 +5,7 @@
 #include <QScrollArea>
 #include "renderarea.h"
 #include <QToolBar>
+#include "newautocell.h"
 namespace Ui {
 class MainWindow;
 }
@@ -17,11 +18,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private:
+protected:
     Ui::MainWindow *ui;
+    RenderArea *renderArea;
+    NewAutoCell *newCellDialog;
 
 public slots:
     void pause();
+    void createNewAutoCell();
 
 };
 

@@ -29,17 +29,20 @@ SOURCES += \
     renderarea.cpp \
     autocell.cpp \
     oned.cpp \
-    sleeper.cpp
+    sleeper.cpp \
+    newautocell.cpp
 
 HEADERS += \
         mainwindow.h \
     renderarea.h \
     autocell.h \
     oned.h \
-    sleeper.h
+    sleeper.h \
+    newautocell.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    newautocell.ui
 
 RESOURCES += \
     ressources.qrc

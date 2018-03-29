@@ -20,10 +20,13 @@ public:
     void drawOneD(QPainter &painter);
     void drawOneD(QPainter &painter,int state);
 
+    OneD *getAutoCell() const;
+    void setAutoCell(OneD *value);
+
 public slots:
-     void next();
-     void play();
-     void playIsChecked(bool checked);
+    void next();
+    void play();
+    void playIsChecked(bool checked);
 
 signals:
      void pause();
@@ -32,9 +35,9 @@ signals:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
-    OneD autoCell;
+    OneD *autoCell;
     double zoom;
-     QTimer *timer;
+    QTimer *timer;
 
 
 

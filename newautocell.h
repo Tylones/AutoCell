@@ -15,6 +15,10 @@ public:
     explicit NewAutoCell(QWidget *parent = 0);
     ~NewAutoCell();
 
+public slots:
+   void typeChanged(QString s);
+
+
 private:
     Ui::NewAutoCell *ui;
 };
