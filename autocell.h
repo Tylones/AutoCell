@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QPoint>
+#include "etat.h"
 
 class AutoCell
 {
@@ -35,9 +36,12 @@ public:
     int getCurrentState() const;
     void setCurrentState(int value);
 
+    QVector<Etat> getEtats() const;
+    void setEtats(const QVector<Etat> &value);
+
 protected:
 
-    QVector< QVector <int> > matrice;
+    QVector< Etat > etats;
     int width;
     int height;
     int cellWidth;

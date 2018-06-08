@@ -22,14 +22,16 @@ void RenderArea::drawOneD(QPainter &painter)
 {
     if(autoCell!=nullptr)
     {
-        QVector< QVector<int> > matrice=autoCell->getMatrice();
-        QVector< QVector<int> >::iterator row;
-        QVector<int>::iterator col;
-        for (row = matrice.begin(); row != matrice.end(); row++) {
-            for (col = row->begin(); col != row->end(); col++) {
+        QVector < Etat > etats=autoCell->getEtats();
+        QVector <Etat> ::iterator row;
+        QVector <int>::iterator col;
+        for (row = etats.begin(); row != etats.end(); row++) {
+            QVector <int > line = row->getMatrice()[0];
+
+            for (col = line.begin(); col != line.end(); col++) {
                 //painter.drawRect((row-matrice.begin())*10,(col-row->begin())*10,10,10);
                 if(*col==1)
-                    painter.fillRect((row-matrice.begin())*10,(col-row->begin())*10,10,10,Qt::SolidPattern);
+                    painter.fillRect((row-etats.begin())*10,(col-line.begin())*10,10,10,Qt::SolidPattern);
             }
         }
 

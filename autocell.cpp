@@ -1,6 +1,6 @@
 #include "autocell.h"
 
-AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),matrice(QVector< QVector <int> >(width, QVector<int>(height))),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
+AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),etats(QVector< Etat >(height)),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
 {
     if(height>1)
     {
@@ -9,15 +9,15 @@ AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellS
 
 }
 
-QVector<QVector<int> >AutoCell::getMatrice() const
-{
-    return matrice;
-}
+//QVector<QVector<int> >AutoCell::getMatrice() const
+//{
+//    return matrice;
+//}
 
-void AutoCell::setMatrice(const QVector<QVector<int> > &value)
-{
-    matrice = value;
-}
+//void AutoCell::setMatrice(const QVector<QVector<int> > &value)
+//{
+//    matrice = value;
+//}
 
 int AutoCell::getWidth() const
 {
@@ -77,4 +77,14 @@ int AutoCell::getCurrentState() const
 void AutoCell::setCurrentState(int value)
 {
     currentState = value;
+}
+
+QVector<Etat> AutoCell::getEtats() const
+{
+    return etats;
+}
+
+void AutoCell::setEtats(const QVector<Etat> &value)
+{
+    etats = value;
 }

@@ -30,7 +30,8 @@ SOURCES += \
     autocell.cpp \
     oned.cpp \
     sleeper.cpp \
-    newautocell.cpp
+    newautocell.cpp \
+    etat.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     autocell.h \
     oned.h \
     sleeper.h \
-    newautocell.h
+    newautocell.h \
+    etat.h
 
 FORMS += \
         mainwindow.ui \
