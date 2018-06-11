@@ -59,6 +59,8 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 			zoom=(double)width()/(double)(autoCell->getWidth()*autoCell->getCellWidth());
 		if(autoCell->getHeight()*autoCell->getCellHeight()*zoom>height())
 			zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
+		if(autoCell->getCurrentState() * autoCell->getCellHeight()*zoom > height())
+			zoom=(double)autoCell->getCurrentState()/(double)(autoCell->getCurrentState()*autoCell->getCellHeight());
 
 		qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << zoom;
 		painter.scale(zoom,zoom);
