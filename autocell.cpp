@@ -1,6 +1,6 @@
 #include "autocell.h"
 
-AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),etats(1),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
+AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),etats(0),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
 {
     if(height>1)
     {
@@ -8,7 +8,6 @@ AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellS
     }
 
 	etats.push_back(Etat(height,width));
-	etats.pop_front();
 }
 
 QVector<QVector<int> >AutoCell::getMatrice() const

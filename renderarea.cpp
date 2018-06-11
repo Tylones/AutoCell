@@ -26,9 +26,39 @@ void RenderArea::drawOneD(QPainter &painter)
 		for(int i = 0; i < etats.size(); i++){
 			for(int j =0; j < etats[i].getMatrice().size(); j++){
 				for(int k = 0; k < etats[i].getMatrice()[j].size(); k++){
-					if(etats[i].getMatrice()[j][k]==1)
-						painter.fillRect((k)*10,(j)*10,10,10,Qt::SolidPattern);
+					switch(etats[i].getMatrice()[j][k]){
+					case 0:
+						painter.setBrush(Qt::black);
+						painter.setPen(Qt::black);
+						break;
+					case 2:
+						painter.setBrush(Qt::black);
+						painter.setPen(Qt::white);
+						break;
+					case 3:
+						painter.setBrush(Qt::red);
+						painter.setPen(Qt::white);
+						break;
+					case 4:
+						painter.setBrush(Qt::green);
+						painter.setPen(Qt::white);
+						break;
+					case 5:
+						painter.setBrush(Qt::blue);
+						painter.setPen(Qt::white);
+						break;
+					case 6:
+						painter.setBrush(Qt::yellow);
+						painter.setPen(Qt::white);
+						break;
+					default:
+					painter.setBrush(Qt::white);
+					painter.setPen(Qt::black);
+					}
+
+					painter.drawRect((k)*10,(j)*10,10,10);
 				}
+
 			}
 		}
 		/*QVector <Etat> ::iterator row;
@@ -116,12 +146,12 @@ void RenderArea::mousePressEvent(QMouseEvent* ev)
 	}
 }
 
-OneD *RenderArea::getAutoCell() const
+AutoCell *RenderArea::getAutoCell() const
 {
 	return autoCell;
 }
 
-void RenderArea::setAutoCell(OneD *value)
+void RenderArea::setAutoCell(AutoCell *value)
 {
 	autoCell = value;
 }

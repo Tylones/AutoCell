@@ -5,7 +5,9 @@
 #include<QPainter>
 #include <QMouseEvent>
 #include "autocell.h"
+#include "quadlife.h"
 #include"oned.h"
+#include"jeuvie.h"
 #include "sleeper.h"
 #include <QTimer>
 
@@ -20,8 +22,8 @@ public:
     void drawOneD(QPainter &painter);
     void drawOneD(QPainter &painter,int state);
 
-    OneD *getAutoCell() const;
-    void setAutoCell(OneD *value);
+	AutoCell *getAutoCell() const;
+	void setAutoCell(AutoCell *value);
 
 public slots:
     void next();
@@ -35,7 +37,7 @@ signals:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
-    OneD *autoCell;
+	AutoCell *autoCell;
     double zoom;
     QTimer *timer;
 
