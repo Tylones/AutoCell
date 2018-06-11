@@ -73,36 +73,26 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
 
 void OneD::nextState()
 {
-    for (int i=0; i<width; i++)
-    {
-        int index;
+	currentState++;
+	Etat etat(currentState+1,width);
+	for(int i = 0; i < currentState; i++){
+		for(int j = 0; j < width; j++){
+			etat.setValue(i,j,etats.last().getMatrice()[i][j]);
+		}
+	}
 
-        if(i<1)
-            index=etats.last().getMatrice()[i+neighborhood[1][0]][currentState]*2+etats.last().getMatrice()[i+neighborhood[2][0]][currentState];
+	for(int i = 0; i < width; i++){
+		int index;
+		if(i==0)
+			index = etats.last().getMatrice()[currentState-1][i]*2 + etats.last().getMatrice()[currentState - 1][i+1];
+		else if(i == width-1)
+			index = etats.last().getMatrice()[currentState - 1][i - 1]*4 + etats.last().getMatrice()[currentState - 1][i]*2;
+		else
+			index = etats.last().getMatrice()[currentState - 1][i - 1]*4 + etats.last().getMatrice()[currentState - 1][i]*2 + etats.last().getMatrice()[currentState - 1][i+1];
+		etat.setValue(currentState,i,rule[index]);
+	}
 
-        else if(i>=width-2)
-            index =etats.last().getMatrice()[i+neighborhood[0][0]][currentState]*4+etats.last().getMatrice()[i+neighborhood[1][0]][currentState]*2;
-
-        else
-            index=etats.last().getMatrice()[i+neighborhood[0][0]][currentState]*4+etats.last().getMatrice()[i+neighborhood[1][0]][currentState]*2+etats.last().getMatrice()[i+neighborhood[2][0]][currentState];
-
-        etats.last().getMatrice()[i].push_back(rule[index]);
-    }
-
-    currentState++;
-    height++;
-
-    if(etats.last().getMatrice()[1][currentState]==1)
-    {
-        width++;
-        etats.last().getMatrice().push_front(QVector <int>(height));
-    }
-
-    if(etats.last().getMatrice()[width-1][currentState]==1)
-    {
-        width++;
-        etats.last().getMatrice().push_back(QVector <int>(height));
-    }
+	etats.push_back(etat);
 
 }
 
@@ -111,11 +101,17 @@ void OneD::changeCellState(const QPoint point)
 
    if(point.x()/cellWidth < width && point.y()/cellHeight < height)
    {
-       if(etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]==1)
-           etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=0;
+	   int x = point.x()/cellWidth;
+	   int y = point.y()/cellHeight;
+	   if(etats.last().getMatrice()[y][x]==1)
+		   etats.last().setValue(y,x,0);
 
-       else
-           etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
+	   else{
+		   //etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
+
+		   etats.last().setValue(y,x,1);
+
+	   }
    }
 }
 

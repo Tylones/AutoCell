@@ -18,9 +18,9 @@ public:
 
 
 protected:
-    static QVector< QVector < QVector <int>> > rulesTab;
+	static QVector< QVector < QVector <int> > > rulesTab;
     QVector<int>rule;
-    static QVector < QVector < QVector <int>> >makeRules();
+	static QVector < QVector < QVector <int> > >makeRules();
 
 
 
