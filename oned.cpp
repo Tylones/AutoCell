@@ -74,6 +74,7 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
 void OneD::nextState()
 {
 	currentState++;
+    height++;
     Etat etat(1,width);
     QVector<QVector <int>> lastMat= etats.last().getMatrice();
 

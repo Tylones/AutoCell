@@ -31,12 +31,12 @@ void RenderArea::drawOneD(QPainter &painter)
                 for(int k = 0; k < mat[0].size(); k++){
                     switch(mat[0][k]){
                     case 0:
-                        painter.setBrush(Qt::black);
+                        painter.setBrush(Qt::white);
                         painter.setPen(Qt::black);
                         break;
                     case 2:
                         painter.setBrush(Qt::black);
-                        painter.setPen(Qt::white);
+                        painter.setPen(Qt::black);
                         break;
                     case 3:
                         painter.setBrush(Qt::red);
@@ -55,7 +55,7 @@ void RenderArea::drawOneD(QPainter &painter)
                         painter.setPen(Qt::white);
                         break;
                     default:
-                        painter.setBrush(Qt::white);
+                        painter.setBrush(Qt::black);
                         painter.setPen(Qt::black);
                     }
 
@@ -70,12 +70,12 @@ void RenderArea::drawOneD(QPainter &painter)
                 for(int k = 0; k < mat[j].size(); k++){
                     switch(mat[j][k]){
                     case 0:
-                        painter.setBrush(Qt::black);
+                        painter.setBrush(Qt::white);
                         painter.setPen(Qt::black);
                         break;
                     case 2:
                         painter.setBrush(Qt::black);
-                        painter.setPen(Qt::white);
+                        painter.setPen(Qt::black);
                         break;
                     case 3:
                         painter.setBrush(Qt::red);
@@ -94,11 +94,13 @@ void RenderArea::drawOneD(QPainter &painter)
                         painter.setPen(Qt::white);
                         break;
                     default:
-                        painter.setBrush(Qt::white);
-                        painter.setPen(Qt::black);
+                        painter.setBrush(Qt::black);
+                        painter.setPen(Qt::white);
                     }
+                    int centre =0;
+                            //= (((width()-(autoCell->getWidth()*autoCell->getCellWidth()*zoom))/2));
 
-                    painter.drawRect((k)*10,(j)*10,10,10);
+                    painter.drawRect(centre+(k)*10,j*10,10,10);
                 }
 
             }
@@ -118,8 +120,8 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 			zoom=(double)width()/(double)(autoCell->getWidth()*autoCell->getCellWidth());
 		if(autoCell->getHeight()*autoCell->getCellHeight()*zoom>height())
 			zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
-        if(autoCell->getCurrentState() * autoCell->getCellHeight()*zoom > height())
-            zoom=(double)height()/(double)(autoCell->getCurrentState()*autoCell->getCellHeight());
+        if(autoCell->getHeight() * autoCell->getCellHeight()*zoom > height())
+            zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
 
         qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << "//" << autoCell->getCurrentState() << "//" << autoCell->getCellHeight() << "//" << autoCell->getHeight() << zoom;
 		painter.scale(zoom,zoom);

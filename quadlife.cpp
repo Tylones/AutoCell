@@ -5,12 +5,11 @@
 
 QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbEtats, int nb_neighborhood) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3)
 {
-	etats.push_back(Etat(height,width));
-	for(int i = 0; i < height; i++){
-		for(int j = 0; j < width; j++){
-			etats.last().setValue(i,j,2);
-		}
-	}
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            etats.last().setValue(i,j,2);
+        }
+    }
 }
 
 void QuadLife::changeCellState(QPoint point)
@@ -19,14 +18,14 @@ void QuadLife::changeCellState(QPoint point)
 	{
 		int x = point.x()/cellWidth;
 		int y = point.y()/cellHeight;
-		int value = etats.last().getMatrice()[y][x];
+        int value = etats[currentState%nbMaxEtats].getMatrice()[y][x];
 		if(value < 6)
 			etats.last().setValue(y,x,++value);
 
 		else{
 			//etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
 
-			etats.last().setValue(y,x,2);
+            etats[currentState%nbMaxEtats].setValue(y,x,2);
 
 		}
 	}

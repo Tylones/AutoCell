@@ -33,7 +33,24 @@ void MainWindow::pause()
 
 void MainWindow::createNewAutoCell()
 {
-    renderArea->setAutoCell(new OneD());
+
+    if(newCellDialog->getType()=="Simple one dimension")
+    {
+        renderArea->setAutoCell(new OneD(newCellDialog->getWidth()));
+
+    }
+    else if(newCellDialog->getType()=="Game of life")
+    {
+        renderArea->setAutoCell(new jeuVie(newCellDialog->getHeight(),newCellDialog->getWidth()));
+
+    }
+
+    else if(newCellDialog->getType()=="Quad life")
+    {
+        renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth()));
+
+    }
+
     ui->actionplay->setEnabled(true);
     ui->actionnext->setEnabled(true);
 

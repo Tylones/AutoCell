@@ -33,3 +33,25 @@ void NewAutoCell::typeChanged(QString s){
    }
 
 }
+
+QString NewAutoCell::getType() const
+{
+    return ui->comboBox->currentText();
+}
+
+QString NewAutoCell::getName() const
+{
+    return ui->lineEdit->text();
+}
+
+
+int NewAutoCell::getHeight() const
+{
+    return ui->dHeight->value();
+}
+
+int NewAutoCell::getWidth() const
+{
+    return ui->dWidth->value();
+}
+

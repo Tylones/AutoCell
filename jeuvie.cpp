@@ -14,12 +14,12 @@ void jeuVie::changeCellState(const QPoint point)
 		int x = point.x()/cellWidth;
 		int y = point.y()/cellHeight;
 		if(etats.last().getMatrice()[y][x]==1)
-			etats.last().setValue(y,x,0);
+            etats[currentState%nbMaxEtats].setValue(y,x,0);
 
 		else{
 			//etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
 
-			etats.last().setValue(y,x,1);
+            etats[currentState%nbMaxEtats].setValue(y,x,1);
 
 		}
 	}
@@ -34,7 +34,8 @@ void jeuVie::nextState()
 		for(int j = 0; j < width; j++){
             etat.setValue(i,j,willBorn(i,j,etats[(currentState-1)%nbMaxEtats]));
 		}
-	}
+    }
+
     if(currentState<nbMaxEtats)
 	etats.push_back(etat);
 
