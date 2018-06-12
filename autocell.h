@@ -42,6 +42,7 @@ public:
 protected:
 
     QVector< Etat > etats;
+    const static int nbMaxEtats = 10;
     int width;
     int height;
     int cellWidth;

@@ -42,7 +42,7 @@ void QuadLife::nextState()
 			int nextValue = 2;
 			if(value == 2 && willBorn(i,j,etats.last())){
 				nextValue = getNextValue(i,j,etats.last());
-				qDebug() << "CA MARCHE SAOEZPIEA value = " << nextValue;
+//				qDebug() << "CA MARCHE SAOEZPIEA value = " << nextValue;
 			}
 			else if(value !=2 && willBorn(i,j,etats.last())){
 				nextValue = value;
@@ -54,7 +54,11 @@ void QuadLife::nextState()
 			//qDebug() << "i = " << i << "//" << "j = " << j << "value : " << value;
 		}
 	}
-	etats.push_back(etat);
+    if(currentState<nbMaxEtats)
+    etats.push_back(etat);
+
+    else
+        etats[currentState%nbMaxEtats]=etat;
 	// etats.pop_front(); // pour tester la ram
 }
 

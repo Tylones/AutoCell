@@ -20,62 +20,91 @@ QSize RenderArea::minimumSizeHint() const
 
 void RenderArea::drawOneD(QPainter &painter)
 {
-	if(autoCell!=nullptr)
-	{
-		QVector < Etat > etats=autoCell->getEtats();
-		for(int i = 0; i < etats.size(); i++){
-			for(int j =0; j < etats[i].getMatrice().size(); j++){
-				for(int k = 0; k < etats[i].getMatrice()[j].size(); k++){
-					switch(etats[i].getMatrice()[j][k]){
-					case 0:
-						painter.setBrush(Qt::black);
-						painter.setPen(Qt::black);
-						break;
-					case 2:
-						painter.setBrush(Qt::black);
-						painter.setPen(Qt::white);
-						break;
-					case 3:
-						painter.setBrush(Qt::red);
-						painter.setPen(Qt::white);
-						break;
-					case 4:
-						painter.setBrush(Qt::green);
-						painter.setPen(Qt::white);
-						break;
-					case 5:
-						painter.setBrush(Qt::blue);
-						painter.setPen(Qt::white);
-						break;
-					case 6:
-						painter.setBrush(Qt::yellow);
-						painter.setPen(Qt::white);
-						break;
-					default:
-					painter.setBrush(Qt::white);
-					painter.setPen(Qt::black);
-					}
+    if(autoCell!=nullptr){
+        QVector < Etat > etats=autoCell->getEtats();
+        QVector <QVector < int > >    mat;
 
-					painter.drawRect((k)*10,(j)*10,10,10);
-				}
+        if(etats.last().getMatrice().size()==1){
 
-			}
-		}
-		/*QVector <Etat> ::iterator row;
-		QVector <int>::iterator col;
-		for (row = etats.begin(); row != etats.end(); row++) {
-			QVector <int > line = row->getMatrice()[0];
+            for(int j =0; j < etats.size(); j++){
+                mat=etats[j].getMatrice();
+                for(int k = 0; k < mat[0].size(); k++){
+                    switch(mat[0][k]){
+                    case 0:
+                        painter.setBrush(Qt::black);
+                        painter.setPen(Qt::black);
+                        break;
+                    case 2:
+                        painter.setBrush(Qt::black);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 3:
+                        painter.setBrush(Qt::red);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 4:
+                        painter.setBrush(Qt::green);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 5:
+                        painter.setBrush(Qt::blue);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 6:
+                        painter.setBrush(Qt::yellow);
+                        painter.setPen(Qt::white);
+                        break;
+                    default:
+                        painter.setBrush(Qt::white);
+                        painter.setPen(Qt::black);
+                    }
 
-			for (col = line.begin(); col != line.end(); col++) {
-				//painter.drawRect((row-matrice.begin())*10,(col-row->begin())*10,10,10);
-				if(*col==1)
-					painter.fillRect((row-etats.begin())*10,(col-line.begin())*10,10,10,Qt::SolidPattern);
-			}
-		}*/
+                    painter.drawRect((k)*10,(j)*10,10,10);
+                }
 
-	}
+            }
+        }
+        else{
+            mat=etats[autoCell->getCurrentState()%10].getMatrice();
+            for(int j =0; j < mat.size(); j++){
+                for(int k = 0; k < mat[j].size(); k++){
+                    switch(mat[j][k]){
+                    case 0:
+                        painter.setBrush(Qt::black);
+                        painter.setPen(Qt::black);
+                        break;
+                    case 2:
+                        painter.setBrush(Qt::black);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 3:
+                        painter.setBrush(Qt::red);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 4:
+                        painter.setBrush(Qt::green);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 5:
+                        painter.setBrush(Qt::blue);
+                        painter.setPen(Qt::white);
+                        break;
+                    case 6:
+                        painter.setBrush(Qt::yellow);
+                        painter.setPen(Qt::white);
+                        break;
+                    default:
+                        painter.setBrush(Qt::white);
+                        painter.setPen(Qt::black);
+                    }
+
+                    painter.drawRect((k)*10,(j)*10,10,10);
+                }
+
+            }
+        }
+    }
 }
-
 
 
 
@@ -85,14 +114,14 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 	QPainter painter(this);
 	if(autoCell!=nullptr)
 	{
-		if(autoCell->getWidth()>autoCell->getHeight())
+        if(autoCell->getWidth()>=autoCell->getHeight())
 			zoom=(double)width()/(double)(autoCell->getWidth()*autoCell->getCellWidth());
 		if(autoCell->getHeight()*autoCell->getCellHeight()*zoom>height())
 			zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
-		if(autoCell->getCurrentState() * autoCell->getCellHeight()*zoom > height())
-			zoom=(double)autoCell->getCurrentState()/(double)(autoCell->getCurrentState()*autoCell->getCellHeight());
+        if(autoCell->getCurrentState() * autoCell->getCellHeight()*zoom > height())
+            zoom=(double)height()/(double)(autoCell->getCurrentState()*autoCell->getCellHeight());
 
-		qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << zoom;
+        qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << "//" << autoCell->getCurrentState() << "//" << autoCell->getCellHeight() << "//" << autoCell->getHeight() << zoom;
 		painter.scale(zoom,zoom);
 		drawOneD(painter);
 	}

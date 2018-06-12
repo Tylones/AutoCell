@@ -31,7 +31,9 @@ SOURCES += \
     oned.cpp \
     sleeper.cpp \
     newautocell.cpp \
-    etat.cpp
+    etat.cpp \
+    quadlife.cpp \
+    jeuvie.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +42,9 @@ HEADERS += \
     oned.h \
     sleeper.h \
     newautocell.h \
-    etat.h
+    etat.h \
+    quadlife.h \
+    jeuvie.h
 
 FORMS += \
         mainwindow.ui \

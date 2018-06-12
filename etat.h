@@ -18,7 +18,7 @@ public:
 	const QVector<QVector<int> >& getMatrice() const{return matrice;}
     void setMatrice(const QVector<QVector<int> > &value);
 	void setValue(int x, int y, int val);
-	void pushBack(int);
+    void pushBack(int);
 	void pushFront(int);
 };
 

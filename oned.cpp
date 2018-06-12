@@ -74,22 +74,18 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
 void OneD::nextState()
 {
 	currentState++;
-	Etat etat(currentState+1,width);
-	for(int i = 0; i < currentState; i++){
-		for(int j = 0; j < width; j++){
-			etat.setValue(i,j,etats.last().getMatrice()[i][j]);
-		}
-	}
+    Etat etat(1,width);
+    QVector<QVector <int>> lastMat= etats.last().getMatrice();
 
 	for(int i = 0; i < width; i++){
 		int index;
 		if(i==0)
-			index = etats.last().getMatrice()[currentState-1][i]*2 + etats.last().getMatrice()[currentState - 1][i+1];
+            index = lastMat[0][i]*2 + lastMat[0][i+1];
 		else if(i == width-1)
-			index = etats.last().getMatrice()[currentState - 1][i - 1]*4 + etats.last().getMatrice()[currentState - 1][i]*2;
+            index = lastMat[0][i - 1]*4 + lastMat[0][i]*2;
 		else
-			index = etats.last().getMatrice()[currentState - 1][i - 1]*4 + etats.last().getMatrice()[currentState - 1][i]*2 + etats.last().getMatrice()[currentState - 1][i+1];
-		etat.setValue(currentState,i,rule[index]);
+            index = lastMat[0][i - 1]*4 + lastMat[0][i]*2 + lastMat[0][i+1];
+        etat.setValue(0,i,rule[index]);
 	}
 
 	etats.push_back(etat);

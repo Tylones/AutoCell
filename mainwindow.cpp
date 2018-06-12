@@ -33,7 +33,7 @@ void MainWindow::pause()
 
 void MainWindow::createNewAutoCell()
 {
-	renderArea->setAutoCell(new QuadLife());
+    renderArea->setAutoCell(new OneD());
     ui->actionplay->setEnabled(true);
     ui->actionnext->setEnabled(true);
 

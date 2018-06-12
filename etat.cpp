@@ -21,6 +21,7 @@ void Etat::setValue(int x, int y, int val)
 
 void Etat::pushBack(int height)
 {
+
 	matrice.push_back(QVector < int > (height));
 }
 
