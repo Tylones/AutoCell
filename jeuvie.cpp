@@ -11,8 +11,8 @@ void jeuVie::changeCellState(const QPoint point)
 {
 	if(point.x()/cellWidth < width && point.y()/cellHeight < height)
 	{
-		int x = point.x()/cellWidth;
-		int y = point.y()/cellHeight;
+		int x = point.x();
+		int y = point.y();
 		if(etats.last().getMatrice()[y][x]==1)
             etats[currentState%nbMaxEtats].setValue(y,x,0);
 

@@ -26,6 +26,9 @@ void RenderArea::drawOneD(QPainter &painter)
 
         if(etats.last().getMatrice().size()==1){
 
+			int cellHeight =(height() / (autoCell->getEtats().size()));
+			int cellWidth =(width() / (autoCell->getWidth()));
+
             for(int j =0; j < etats.size(); j++){
                 mat=etats[j].getMatrice();
                 for(int k = 0; k < mat[0].size(); k++){
@@ -33,7 +36,7 @@ void RenderArea::drawOneD(QPainter &painter)
                     case 0:
                         painter.setBrush(Qt::white);
                         painter.setPen(Qt::black);
-                        break;
+						break;
                     case 2:
                         painter.setBrush(Qt::black);
                         painter.setPen(Qt::black);
@@ -58,8 +61,10 @@ void RenderArea::drawOneD(QPainter &painter)
                         painter.setBrush(Qt::black);
                         painter.setPen(Qt::black);
                     }
-
-                    painter.drawRect((k)*10,(j)*10,10,10);
+					if(10* autoCell->getEtats().size() > height())
+						painter.drawRect((k) * cellWidth, j*cellHeight,cellWidth ,cellHeight);
+					else
+						painter.drawRect((k) * cellWidth, j*10, cellWidth,10);
                 }
 
             }
@@ -100,7 +105,9 @@ void RenderArea::drawOneD(QPainter &painter)
                     int centre =0;
                             //= (((width()-(autoCell->getWidth()*autoCell->getCellWidth()*zoom))/2));
 
-                    painter.drawRect(centre+(k)*10,j*10,10,10);
+					int cellHeight =(height() / (autoCell->getHeight()));
+					int cellWidth =(width() / (autoCell->getWidth()));
+					painter.drawRect((k) * cellWidth, j * cellHeight, cellWidth, cellHeight);
                 }
 
             }
@@ -169,8 +176,10 @@ void RenderArea::mousePressEvent(QMouseEvent* ev)
 	if(autoCell!=nullptr)
 	{
 		if (ev->button() == Qt::LeftButton) {
-			autoCell->changeCellState(QPoint(ev->pos().x()/zoom,ev->pos().y()/zoom));
-			qDebug() << ev->pos().x()/zoom << "//" << ev->pos().y()/zoom << "//" << zoom;
+			int cellHeight =(height() / (autoCell->getHeight()));
+			int cellWidth =(width() / (autoCell->getWidth()));
+			autoCell->changeCellState(QPoint(ev->pos().x()/cellWidth,ev->pos().y()/cellHeight));
+			qDebug() << ev->pos().x()/cellWidth << "//" << ev->pos().y()/cellHeight << "//" << zoom;
 			update();
 
 		}
