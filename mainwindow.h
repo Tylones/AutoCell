@@ -6,6 +6,7 @@
 #include "renderarea.h"
 #include <QToolBar>
 #include "newautocell.h"
+#include "openautocell.h"
 namespace Ui {
 class MainWindow;
 }
@@ -22,11 +23,12 @@ protected:
     Ui::MainWindow *ui;
     RenderArea *renderArea;
     NewAutoCell *newCellDialog;
+    OpenAutoCell *openCellDialog;
 
 public slots:
     void pause();
     void createNewAutoCell();
-
+    void openAutoCell();
 };
 
 #endif // MAINWINDOW_H
