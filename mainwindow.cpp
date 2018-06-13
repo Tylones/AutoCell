@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(ui->scrollArea);
 
 
+
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
@@ -66,6 +67,7 @@ void MainWindow::openAutoCell(){
     else if (openCellDialog->getFile().getNoeud("type") == "quadLife")
         renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
 }
+
 
 
 MainWindow::~MainWindow()
