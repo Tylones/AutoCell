@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
     QObject::connect(newCellDialog, &NewAutoCell::accepted,this ,&MainWindow::createNewAutoCell );
 
-
 }
 
 void MainWindow::pause()
@@ -36,7 +35,7 @@ void MainWindow::createNewAutoCell()
 
     if(newCellDialog->getType()=="Simple one dimension")
     {
-        renderArea->setAutoCell(new OneD(newCellDialog->getWidth()));
+		renderArea->setAutoCell(new OneD(newCellDialog->getWidth(),10,10,2,newCellDialog->getRule(),3));
 
     }
     else if(newCellDialog->getType()=="Game of life")
@@ -47,7 +46,7 @@ void MainWindow::createNewAutoCell()
 
     else if(newCellDialog->getType()=="Quad life")
     {
-        renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth()));
+		renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins()));
 
     }
 

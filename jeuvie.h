@@ -11,6 +11,7 @@ public:
 	jeuVie(int height = 100, int width=100, int cellWidth=10, int cellHeight=10,int nbEtats=2,int nb_neighborhood=3);
 	void changeCellState(const QPoint point);
 	void nextState();
+	void generateRandomly();
 
 private:
 	bool willBorn(int x, int y, Etat etat);

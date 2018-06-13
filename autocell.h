@@ -33,6 +33,8 @@ public:
 
     virtual void nextState()=0;
 
+	virtual void generateRandomly() = 0;
+
     int getCurrentState() const;
     void setCurrentState(int value);
 
