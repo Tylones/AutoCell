@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setCentralWidget(ui->scrollArea);
 
-
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered,newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
     QObject::connect(ui->actionnext, &QAction::triggered,renderArea , &RenderArea::next);
@@ -54,6 +53,7 @@ void MainWindow::createNewAutoCell()
     ui->actionnext->setEnabled(true);
 
 }
+
 
 
 MainWindow::~MainWindow()

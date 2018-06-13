@@ -3,7 +3,7 @@
 RenderArea::RenderArea(QWidget *parent)
 	: QWidget(parent),zoom(1),autoCell(nullptr)
 {
-	// OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood)
+	// OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood)test
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(play()));
 }
