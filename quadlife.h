@@ -16,14 +16,11 @@ Dans cet automate, voici ce à quoi correspondent les états :
 */
 
 public:
-	QuadLife(int height = 100, int width=100, int cellWidth=10, int cellHeight=10,int nbMinVoisins=2,int nbMaxVoisins=3);
+	QuadLife(int height = 100, int width=100, int cellWidth=10, int cellHeight=10,int nbEtats=2,int nb_neighborhood=3);
 	void changeCellState(QPoint point);
 	void nextState();
-	void generateRandomly();
 
 private:
-	int nbMinVoisins;
-	int nbMaxVoisins;
 	int getNextValue(int x, int y, Etat etat);
 	bool willBorn(int x, int y, Etat etat);
 
