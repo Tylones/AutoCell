@@ -17,11 +17,14 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(ui->scrollArea);
 
 
-    QObject::connect(ui->actionNew_AutoCell, &QAction::triggered,newCellDialog ,&NewAutoCell::show );
+    QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
+    QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
     QObject::connect(ui->actionnext, &QAction::triggered,renderArea , &RenderArea::next);
     QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
     QObject::connect(newCellDialog, &NewAutoCell::accepted,this ,&MainWindow::createNewAutoCell );
+    QObject::connect(openCellDialog, &OpenAutoCell::accepted, this, &MainWindow::openAutoCell);
+
 
 }
 
@@ -35,7 +38,7 @@ void MainWindow::createNewAutoCell()
 
     if(newCellDialog->getType()=="Simple one dimension")
     {
-		renderArea->setAutoCell(new OneD(newCellDialog->getWidth(),10,10,2,newCellDialog->getRule(),3));
+        renderArea->setAutoCell(new OneD(newCellDialog->getWidth()));
 
     }
     else if(newCellDialog->getType()=="Game of life")
@@ -46,13 +49,22 @@ void MainWindow::createNewAutoCell()
 
     else if(newCellDialog->getType()=="Quad life")
     {
-		renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins()));
+        renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth()));
 
     }
 
     ui->actionplay->setEnabled(true);
     ui->actionnext->setEnabled(true);
 
+}
+
+void MainWindow::openAutoCell(){
+    if(openCellDialog->getFile().getNoeud("type") == "oneD")
+        renderArea->setAutoCell(new OneD(openCellDialog->getFile().getNoeud("width").toInt()));
+    else if (openCellDialog->getFile().getNoeud("type") == "jeuVie")
+        renderArea->setAutoCell(new jeuVie(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
+    else if (openCellDialog->getFile().getNoeud("type") == "quadLife")
+        renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
 }
 
 

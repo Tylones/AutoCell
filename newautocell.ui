@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>584</width>
-    <height>371</height>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,14 +21,27 @@ border: 1px solid black; }
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="2">
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="styleSheet">
-      <string notr="true"/>
+   <item row="5" column="2">
+    <widget class="QSpinBox" name="dHeight"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Default Height:</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="2">
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Default Width:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QSpinBox" name="dWidth"/>
+   </item>
+   <item row="7" column="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -38,15 +51,32 @@ border: 1px solid black; }
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_3">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Default Height:</string>
+      <string>Type:</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="2">
-    <widget class="QSpinBox" name="nbMinVoisins"/>
+   <item row="0" column="2">
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true"> color : white;</string>
+     </property>
+     <property name="text">
+      <string>Name:</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2">
     <widget class="QComboBox" name="comboBox">
@@ -67,30 +97,10 @@ border: 1px solid black; }
      </item>
     </widget>
    </item>
-   <item row="5" column="2">
-    <widget class="QSpinBox" name="dHeight"/>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Rule:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Type:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
-    <widget class="QSpinBox" name="dWidth"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Default Width:</string>
      </property>
     </widget>
    </item>
@@ -101,36 +111,6 @@ border: 1px solid black; }
      </property>
      <property name="maximum">
       <number>256</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="styleSheet">
-      <string notr="true"> color : white;</string>
-     </property>
-     <property name="text">
-      <string>Name:</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2">
-    <widget class="QSpinBox" name="nbMaxVoisins"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Nb min Voisins: </string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label_7">
-     <property name="text">
-      <string>Nb max Voisins</string>
      </property>
     </widget>
    </item>
