@@ -4,7 +4,7 @@
 
 jeuVie::jeuVie(int height, int width, int cellWidth, int cellHeight, int nbEtats, int nb_neighborhood) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3)
 {
-
+	generateRandomly();
 }
 
 void jeuVie::changeCellState(const QPoint point)
@@ -24,6 +24,7 @@ void jeuVie::changeCellState(const QPoint point)
 		}
 	}
 
+
 }
 
 void jeuVie::nextState()
@@ -40,7 +41,16 @@ void jeuVie::nextState()
 	etats.push_back(etat);
 
     else
-        etats[currentState%nbMaxEtats]=etat;
+		etats[currentState%nbMaxEtats]=etat;
+}
+
+void jeuVie::generateRandomly()
+{
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+			etats.last().setValue(i,j,rand()%2);
+		}
+	}
 }
 
 bool jeuVie::willBorn(int x, int y, Etat etat)

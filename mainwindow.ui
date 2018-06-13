@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>936</width>
-         <height>532</height>
+         <height>535</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3"/>
@@ -41,7 +41,7 @@
      <x>0</x>
      <y>0</y>
      <width>956</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -61,6 +61,7 @@
     <addaction name="actionplay"/>
     <addaction name="actionnext"/>
     <addaction name="actionreinit"/>
+    <addaction name="actiongenerate"/>
    </widget>
    <widget class="QMenu" name="menuedit">
     <property name="title">
@@ -196,6 +197,11 @@
   <action name="action_3">
    <property name="text">
     <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actiongenerate">
+   <property name="text">
+    <string>generate</string>
    </property>
   </action>
  </widget>

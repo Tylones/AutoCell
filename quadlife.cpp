@@ -3,13 +3,15 @@
 
 
 
-QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbEtats, int nb_neighborhood) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3)
+QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbMinVoisins, int nbMaxVoisins) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
 {
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             etats.last().setValue(i,j,2);
         }
     }
+
+	generateRandomly();
 }
 
 void QuadLife::changeCellState(QPoint point)
@@ -20,7 +22,7 @@ void QuadLife::changeCellState(QPoint point)
 		int y = point.y()/cellHeight;
         int value = etats[currentState%nbMaxEtats].getMatrice()[y][x];
 		if(value < 6)
-			etats.last().setValue(y,x,++value);
+			etats[currentState%nbMaxEtats].setValue(y,x,++value);
 
 		else{
 			//etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
@@ -33,17 +35,16 @@ void QuadLife::changeCellState(QPoint point)
 
 void QuadLife::nextState()
 {
-	currentState++;
 	Etat etat(height, width);
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
-			int value = etats.last().getMatrice()[i][j];
+			int value = etats[currentState%nbMaxEtats].getMatrice()[i][j];
 			int nextValue = 2;
-			if(value == 2 && willBorn(i,j,etats.last())){
-				nextValue = getNextValue(i,j,etats.last());
+			if(value == 2 && willBorn(i,j,etats[currentState%nbMaxEtats])){
+				nextValue = getNextValue(i,j,etats[currentState%nbMaxEtats]);
 //				qDebug() << "CA MARCHE SAOEZPIEA value = " << nextValue;
 			}
-			else if(value !=2 && willBorn(i,j,etats.last())){
+			else if(value !=2 && willBorn(i,j,etats[currentState%nbMaxEtats])){
 				nextValue = value;
 
 			}
@@ -53,12 +54,26 @@ void QuadLife::nextState()
 			//qDebug() << "i = " << i << "//" << "j = " << j << "value : " << value;
 		}
 	}
+		currentState++;
     if(currentState<nbMaxEtats)
     etats.push_back(etat);
 
     else
         etats[currentState%nbMaxEtats]=etat;
 	// etats.pop_front(); // pour tester la ram
+}
+
+void QuadLife::generateRandomly()
+{
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+			int value = rand()%8;
+			if(value > 4)
+				value = 0;
+			value +=2;
+			etats[currentState%nbMaxEtats].setValue(i,j,value);
+		}
+	}
 }
 
 int QuadLife::getNextValue(int x, int y, Etat etat)
@@ -90,6 +105,8 @@ int QuadLife::getNextValue(int x, int y, Etat etat)
 	for(int i = 2; i < 5; i++){
 		if(nb[i] > nb[ind])
 			ind = i;
+		else if(nb[i] == nb[ind] && rand()%2==0)
+			 ind = i;
 	}
 	return ind+2;
 }
@@ -115,5 +132,6 @@ bool QuadLife::willBorn(int x, int y, Etat etat)
 		n += etat.getMatrice()[x-1][y]!=2;
 	if(x < height-1)
 		n += etat.getMatrice()[x+1][y]!=2;
-	return((etat.getMatrice()[x][y]!=2 && (n == 2 || n == 3)) || (etat.getMatrice()[x][y]==2 && n == 3));
+	return((etat.getMatrice()[x][y]!=2 && (n >= nbMinVoisins && n <= nbMaxVoisins)) || (etat.getMatrice()[x][y]==2 && n == nbMaxVoisins));
+	//return(n >= nbMinVoisins && n <= nbMaxVoisins);
 }
