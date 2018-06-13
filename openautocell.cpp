@@ -1,5 +1,6 @@
 #include "openautocell.h"
 #include "ui_openautocell.h"
+#include <QDebug>
 
 OpenAutoCell::OpenAutoCell(QWidget *parent) :
     QDialog(parent),
@@ -7,9 +8,8 @@ OpenAutoCell::OpenAutoCell(QWidget *parent) :
 {
     ui->setupUi(this);
     file = nullptr;
-    QPushButton* okButton = ui->buttonBox->button(QDialogButtonBox::Ok);
-    QObject::connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(&OpenAutoCell::loadFile()) );
-
+    //QObject::connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(loadFile()) );
+    QObject::connect(ui->pushButton,SIGNAL(clicked()), this, SLOT(loadFileName()));
 }
 
 OpenAutoCell::~OpenAutoCell()
@@ -22,9 +22,19 @@ const Xml_Dom &OpenAutoCell::getFile() const
     return *file;
 }
 
-void OpenAutoCell::loadFile()
+void OpenAutoCell::loadFileName()
 {
-    Xml_Dom dom(ui->comboBox->currentText() + ".xml");
-    file = &dom;
+    QString fileName=QFileDialog::getOpenFileName(this, tr("Open File Name"), "./", tr("XML Files (*.xml)"));
+    ui->lineEdit->setText(fileName);
+}
+
+QString OpenAutoCell::getFileName() const
+{
+    return ui->lineEdit->text();
+}
+
+void OpenAutoCell::setFile(const Xml_Dom *value)
+{
+    file = value;
 }
 

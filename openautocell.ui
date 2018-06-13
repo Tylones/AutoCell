@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>88</height>
+    <height>122</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>20</y>
+     <y>50</y>
      <width>81</width>
      <height>241</height>
     </rect>
@@ -29,30 +29,34 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>290</x>
      <y>20</y>
-     <width>271</width>
+     <width>80</width>
      <height>21</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>sauvegarde_oneD</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>sauvegarde_jeuVie</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>sauvegarde_quadLife</string>
-    </property>
-   </item>
+   <property name="text">
+    <string>Parcourir...</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>251</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources/>

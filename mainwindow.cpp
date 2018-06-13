@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QtGlobal>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,8 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     setCentralWidget(ui->scrollArea);
-
-
 
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
@@ -60,12 +58,19 @@ void MainWindow::createNewAutoCell()
 }
 
 void MainWindow::openAutoCell(){
+    Xml_Dom dom(openCellDialog->getFileName());
+    qDebug(openCellDialog->getFileName().toLatin1());
+    openCellDialog->setFile(&dom);
+    qDebug() << dom.getNoeud("type");
     if(openCellDialog->getFile().getNoeud("type") == "oneD")
         renderArea->setAutoCell(new OneD(openCellDialog->getFile().getNoeud("width").toInt()));
     else if (openCellDialog->getFile().getNoeud("type") == "jeuVie")
         renderArea->setAutoCell(new jeuVie(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
     else if (openCellDialog->getFile().getNoeud("type") == "quadLife")
         renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
+    else
+        qDebug("échec de la quête");
+    qDebug() << renderArea->getAutoCell()->getWidth();
 }
 
 

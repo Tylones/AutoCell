@@ -1,5 +1,6 @@
 #include "xmldom.h"
 #include <iostream>
+#include <QDebug>
 using namespace std;
 
 Xml_Dom::Xml_Dom(const QString file) : QWidget()
@@ -26,6 +27,7 @@ Xml_Dom::Xml_Dom(const QString file) : QWidget()
             noeuds[element.tagName()].append(element.text());
         noeud = noeud.nextSibling();
         element = noeud.toElement();
+        //qDebug() << element.tagName();
     }
 
 }
@@ -37,5 +39,5 @@ Xml_Dom::~Xml_Dom()
 
 const QString Xml_Dom::getNoeud(const QString noeud) const
 {
-    return noeuds.value("noeud");
+    return noeuds.value(noeud);
 }

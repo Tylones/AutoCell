@@ -2,6 +2,7 @@
 #define OPENAUTOCELL_H
 
 #include <QDialog>
+#include <QFileDialog>
 #include "autocell.h"
 #include "xmldom.h"
 #include "oned.h"
@@ -21,9 +22,11 @@ public:
 
     const Xml_Dom &getFile() const;
 
-public slots:
-    void loadFile();
+    void setFile(const Xml_Dom *value);
 
+    QString getFileName() const;
+public slots:
+    void loadFileName();
 private:
     Ui::OpenAutoCell *ui;
     const Xml_Dom *file;
