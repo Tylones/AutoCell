@@ -4,7 +4,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),renderArea(new RenderArea()),newCellDialog(new NewAutoCell(this))
+    ui(new Ui::MainWindow),renderArea(new RenderArea()),newCellDialog(new NewAutoCell(this)),openCellDialog(new OpenAutoCell(this))
 {
 
     ui->setupUi(this);
