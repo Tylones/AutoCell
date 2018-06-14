@@ -15,7 +15,7 @@ public:
     QVector<int> getRules() const;
     void setRules(const QVector<int> &value);
     void setRules(const int n);
-
+	void generateRandomly();
 
 protected:
 	static QVector< QVector < QVector <int> > > rulesTab;

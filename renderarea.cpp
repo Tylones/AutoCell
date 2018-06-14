@@ -151,7 +151,7 @@ void RenderArea::next()
 void RenderArea::play()
 {
 	if(autoCell!=nullptr){
-		timer->start(10);
+		timer->start(100);
 		autoCell->nextState();
 		update();
 		if(autoCell->getWidth()>1920)

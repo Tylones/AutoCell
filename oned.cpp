@@ -58,7 +58,16 @@ QVector<int> OneD::getRules() const
 
 void OneD::setRules(const int n)
 {
-    rule = OneD::rulesTab[n][0];
+	rule = OneD::rulesTab[n][0];
+}
+
+void OneD::generateRandomly()
+{
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+		  etats.last().setValue(i,j,rand()%2);
+		}
+	  }
 }
 
 OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood):AutoCell(width,1,cellWidth,cellHeight,cellStates,nb_neighborhood),rule(QVector<int>(8))
@@ -69,6 +78,8 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
     neighborhood[0][0]=-1;
     neighborhood[1][0]=0;
     neighborhood[2][0]=1;
+	generateRandomly();
+
 }
 
 void OneD::nextState()

@@ -16,6 +16,12 @@ public:
     ~NewAutoCell();
 
 
+	int getNbMinVoisins () const;
+
+	int getNbMaxVoisins () const;
+
+	int getRule() const;
+
 
     int getWidth() const;
 

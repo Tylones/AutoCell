@@ -38,6 +38,7 @@ public:
 
     QVector<Etat> getEtats() const;
     void setEtats(const QVector<Etat> &value);
+	virtual void generateRandomly() = 0;
 
 protected:
 
