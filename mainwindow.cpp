@@ -4,18 +4,21 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),renderArea(new RenderArea()),newCellDialog(new NewAutoCell(this)),openCellDialog(new OpenAutoCell(this))
-{
+    ui(new Ui::MainWindow),renderArea(new RenderArea()),newCellDialog(new NewAutoCell(this)),openCellDialog(new OpenAutoCell(this)){
 
     ui->setupUi(this);
 
 
     ui->scrollArea->setWidget(renderArea);
     ui->scrollArea->setWidgetResizable(true);
-
-
     setCentralWidget(ui->scrollArea);
-
+    QGridLayout *layout = new QGridLayout;
+    vitesseSlider = new QSlider(Qt::Horizontal, this);
+    vitesseSlider->setMinimumWidth(200);
+    vitesseSlider->setMaximumWidth(250);
+    vitesseSlider->setRange(1,500);
+    vitesseSlider->setValue(250);
+    ui->mainToolBar->addWidget(vitesseSlider);
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
@@ -25,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
     QObject::connect(newCellDialog, &NewAutoCell::accepted,this ,&MainWindow::createNewAutoCell );
     QObject::connect(openCellDialog, &OpenAutoCell::accepted, this, &MainWindow::openAutoCell);
+    QObject::connect(vitesseSlider, &QSlider::valueChanged, renderArea, &RenderArea::changeVitesse);
 
 
 }
@@ -45,13 +49,13 @@ void MainWindow::createNewAutoCell()
     else if(newCellDialog->getType()=="Game of life")
     {
 		renderArea->setAutoCell(new jeuVie(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins()));
-
+        ui->actionprevious->setVisible(true);
     }
 
     else if(newCellDialog->getType()=="Quad life")
     {
 		renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins()));
-
+        ui->actionprevious->setVisible(true);
     }
 
     ui->actionplay->setEnabled(true);

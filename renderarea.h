@@ -27,6 +27,7 @@ public:
 
 public slots:
     void next();
+    void changeVitesse(int);
 	void previous();
     void play();
     void playIsChecked(bool checked);
@@ -42,7 +43,7 @@ protected:
 	AutoCell *autoCell;
     double zoom;
     QTimer *timer;
-
+    int vitesse;
 
 
 

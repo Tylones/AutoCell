@@ -22,7 +22,7 @@ void QuadLife::changeCellState(QPoint point)
 		int y = point.y();
         int value = etats[currentState%nbMaxEtats].getMatrice()[y][x];
 		if(value < 6)
-			etats.last().setValue(y,x,++value);
+            etats[currentState%nbMaxEtats].setValue(y,x,++value);
 
 		else{
 			//etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;

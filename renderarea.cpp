@@ -1,7 +1,7 @@
 #include "renderarea.h"
 
 RenderArea::RenderArea(QWidget *parent)
-	: QWidget(parent),zoom(1),autoCell(nullptr)
+    : QWidget(parent),zoom(1),autoCell(nullptr),vitesse(250)
 {
 	// OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood)test
 	timer = new QTimer(this);
@@ -153,19 +153,19 @@ void RenderArea::previous()
 	}
 }
 
+void RenderArea::changeVitesse( int v)
+{
+    vitesse=500-v;
+}
 
 
 void RenderArea::play()
 {
 	if(autoCell!=nullptr){
-		timer->start(100);
+        timer->start(vitesse);
 		autoCell->nextState();
 		update();
-		if(autoCell->getWidth()>1920)
-		{
-			timer->stop();
-			emit pause();
-		}
+
 	}
 }
 

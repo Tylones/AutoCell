@@ -13,7 +13,7 @@ void jeuVie::changeCellState(const QPoint point)
 	{
 		int x = point.x();
 		int y = point.y();
-		if(etats.last().getMatrice()[y][x]==1)
+        if(etats[currentState%nbMaxEtats].getMatrice()[y][x]==1)
             etats[currentState%nbMaxEtats].setValue(y,x,0);
 
 		else{
@@ -47,7 +47,7 @@ void jeuVie::generateRandomly()
 {
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
-		  etats.last().setValue(i,j,rand()%2);
+          etats[currentState%nbMaxEtats].setValue(i,j,rand()%2);
 		}
 	  }
 }
