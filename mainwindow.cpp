@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
+	QObject::connect(ui->actionprevious, &QAction::triggered, renderArea, &RenderArea::previous);
+	QObject::connect(ui->actiongenerate_randomly, &QAction::triggered, renderArea, &RenderArea::generate_randomly);
     QObject::connect(ui->actionnext, &QAction::triggered,renderArea , &RenderArea::next);
     QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
     QObject::connect(newCellDialog, &NewAutoCell::accepted,this ,&MainWindow::createNewAutoCell );

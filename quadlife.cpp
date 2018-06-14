@@ -11,16 +11,15 @@ QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbM
             etats.last().setValue(i,j,2);
         }
     }
-	generateRandomly();
 
 }
 
 void QuadLife::changeCellState(QPoint point)
 {
-	if(point.x()/cellWidth < width && point.y()/cellHeight < height)
+	if(point.x() < width && point.y() < height)
 	{
-		int x = point.x()/cellWidth;
-		int y = point.y()/cellHeight;
+		int x = point.x();
+		int y = point.y();
         int value = etats[currentState%nbMaxEtats].getMatrice()[y][x];
 		if(value < 6)
 			etats.last().setValue(y,x,++value);

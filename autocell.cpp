@@ -57,7 +57,13 @@ int AutoCell::getCellHeight() const
 
 void AutoCell::setCellHeight(int value)
 {
-    cellHeight = value;
+	cellHeight = value;
+}
+
+void AutoCell::previous()
+{
+	if(currentState>1)
+		currentState--;
 }
 
 QVector<QVector<int> > AutoCell::getNeighborhood() const

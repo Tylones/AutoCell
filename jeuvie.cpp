@@ -4,13 +4,12 @@
 
 jeuVie::jeuVie(int height, int width, int cellWidth, int cellHeight, int nbMinVoisins, int nbMaxVoisins) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
 {
-	generateRandomly();
 
 }
 
 void jeuVie::changeCellState(const QPoint point)
 {
-	if(point.x()/cellWidth < width && point.y()/cellHeight < height)
+	if(point.x() < width && point.y() < height)
 	{
 		int x = point.x();
 		int y = point.y();
@@ -29,13 +28,13 @@ void jeuVie::changeCellState(const QPoint point)
 
 void jeuVie::nextState()
 {
-	currentState++;
 	Etat etat(height, width);
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
-            etat.setValue(i,j,willBorn(i,j,etats[(currentState-1)%nbMaxEtats]));
+			etat.setValue(i,j,willBorn(i,j,etats[(currentState)%nbMaxEtats]));
 		}
     }
+	currentState++;
 
     if(currentState<nbMaxEtats)
 		etats.push_back(etat);
