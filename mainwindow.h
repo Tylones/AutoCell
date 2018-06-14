@@ -7,6 +7,7 @@
 #include <QToolBar>
 #include "newautocell.h"
 #include "openautocell.h"
+#include <QSlider>
 namespace Ui {
 class MainWindow;
 }
@@ -24,6 +25,7 @@ protected:
     RenderArea *renderArea;
     NewAutoCell *newCellDialog;
     OpenAutoCell *openCellDialog;
+    QSlider *vitesseSlider;
 
 public slots:
     void pause();

@@ -16,22 +16,25 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>936</width>
-         <height>534</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3"/>
-      </widget>
-     </widget>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>934</width>
+           <height>530</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -41,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>956</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -61,6 +64,8 @@
     <addaction name="actionplay"/>
     <addaction name="actionnext"/>
     <addaction name="actionreinit"/>
+    <addaction name="actionprevious"/>
+    <addaction name="actiongenerate_randomly"/>
    </widget>
    <widget class="QMenu" name="menuedit">
     <property name="title">
@@ -108,8 +113,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionprevious"/>
    <addaction name="actionplay"/>
    <addaction name="actionnext"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionplay">
@@ -196,6 +203,26 @@
   <action name="action_3">
    <property name="text">
     <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionprevious">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/new/icons/Resources/previous.png</normaloff>:/new/icons/Resources/previous.png</iconset>
+   </property>
+   <property name="text">
+    <string>previous</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actiongenerate_randomly">
+   <property name="text">
+    <string>generate randomly</string>
    </property>
   </action>
  </widget>

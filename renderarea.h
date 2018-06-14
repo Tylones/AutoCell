@@ -27,8 +27,11 @@ public:
 
 public slots:
     void next();
+    void changeVitesse(int);
+	void previous();
     void play();
     void playIsChecked(bool checked);
+	void generate_randomly();
 
 signals:
      void pause();
@@ -40,7 +43,7 @@ protected:
 	AutoCell *autoCell;
     double zoom;
     QTimer *timer;
-
+    int vitesse;
 
 
 

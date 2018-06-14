@@ -78,7 +78,6 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
     neighborhood[0][0]=-1;
     neighborhood[1][0]=0;
     neighborhood[2][0]=1;
-	generateRandomly();
 
 }
 
@@ -107,10 +106,10 @@ void OneD::nextState()
 void OneD::changeCellState(const QPoint point)
 {
 
-   if(point.x()/cellWidth < width && point.y()/cellHeight < height)
+   if(point.x() < width && point.y() < height)
    {
-	   int x = point.x()/cellWidth;
-	   int y = point.y()/cellHeight;
+	   int x = point.x();
+	   int y = point.y();
 	   if(etats.last().getMatrice()[y][x]==1)
 		   etats.last().setValue(y,x,0);
 

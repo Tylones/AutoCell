@@ -52,7 +52,7 @@ border: 1px solid black; }
     </widget>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="labelHeight">
      <property name="text">
       <string>Default Height:</string>
      </property>
@@ -86,7 +86,7 @@ border: 1px solid black; }
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="labelRule">
      <property name="text">
       <string>Rule:</string>
      </property>
@@ -121,14 +121,14 @@ border: 1px solid black; }
     <widget class="QSpinBox" name="nbMaxVoisins"/>
    </item>
    <item row="6" column="0">
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="labelMin">
      <property name="text">
       <string>Nombre minimum de voisins</string>
      </property>
     </widget>
    </item>
    <item row="7" column="0">
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="labelMax">
      <property name="text">
       <string>Nombre maximum de voisins</string>
      </property>

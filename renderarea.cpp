@@ -1,7 +1,7 @@
 #include "renderarea.h"
 
 RenderArea::RenderArea(QWidget *parent)
-	: QWidget(parent),zoom(1),autoCell(nullptr)
+    : QWidget(parent),zoom(1),autoCell(nullptr),vitesse(250)
 {
 	// OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood)test
 	timer = new QTimer(this);
@@ -70,7 +70,7 @@ void RenderArea::drawOneD(QPainter &painter)
             }
         }
         else{
-            mat=etats[autoCell->getCurrentState()%10].getMatrice();
+			mat=etats[autoCell->getCurrentState()%AutoCell::nbMaxEtats].getMatrice();
             for(int j =0; j < mat.size(); j++){
                 for(int k = 0; k < mat[j].size(); k++){
                     switch(mat[j][k]){
@@ -123,7 +123,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 	QPainter painter(this);
 	if(autoCell!=nullptr)
 	{
-        if(autoCell->getWidth()>=autoCell->getHeight())
+		/*if(autoCell->getWidth()>=autoCell->getHeight())
 			zoom=(double)width()/(double)(autoCell->getWidth()*autoCell->getCellWidth());
 		if(autoCell->getHeight()*autoCell->getCellHeight()*zoom>height())
 			zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
@@ -131,7 +131,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
             zoom=(double)height()/(double)(autoCell->getHeight()*autoCell->getCellHeight());
 
         qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << "//" << autoCell->getCurrentState() << "//" << autoCell->getCellHeight() << "//" << autoCell->getHeight() << zoom;
-		painter.scale(zoom,zoom);
+		painter.scale(zoom,zoom);*/
 		drawOneD(painter);
 	}
 }
@@ -140,25 +140,32 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 void RenderArea::next()
 {
 	if(autoCell!=nullptr){
-		for(int i =0;i<1;i++)
-			autoCell->nextState();
+		autoCell->nextState();
 		update();
 	}
 }
 
+void RenderArea::previous()
+{
+	if(autoCell!=nullptr){
+		autoCell->previous();
+		update();
+	}
+}
+
+void RenderArea::changeVitesse( int v)
+{
+    vitesse=500-v;
+}
 
 
 void RenderArea::play()
 {
 	if(autoCell!=nullptr){
-		timer->start(100);
+        timer->start(vitesse);
 		autoCell->nextState();
 		update();
-		if(autoCell->getWidth()>1920)
-		{
-			timer->stop();
-			emit pause();
-		}
+
 	}
 }
 
@@ -168,6 +175,12 @@ void RenderArea::playIsChecked(bool checked)
 		play();
 	else
 		timer->stop();
+}
+
+void RenderArea::generate_randomly()
+{
+	autoCell->generateRandomly();
+	update();
 }
 
 
