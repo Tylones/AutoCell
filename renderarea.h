@@ -27,8 +27,10 @@ public:
 
 public slots:
     void next();
+	void previous();
     void play();
     void playIsChecked(bool checked);
+	void generate_randomly();
 
 signals:
      void pause();

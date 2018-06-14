@@ -26,6 +26,8 @@ public:
     int getCellHeight() const;
     void setCellHeight(int value);
 
+	void previous();
+
     QVector<QVector<int> > getNeighborhood() const;
     void setNeighborhood(const QVector<QVector<int> > &value);
 
@@ -38,11 +40,12 @@ public:
 
     QVector<Etat> getEtats() const;
     void setEtats(const QVector<Etat> &value);
+	virtual void generateRandomly() = 0;
+	const static int nbMaxEtats = 10;
 
 protected:
 
     QVector< Etat > etats;
-    const static int nbMaxEtats = 10;
     int width;
     int height;
     int cellWidth;

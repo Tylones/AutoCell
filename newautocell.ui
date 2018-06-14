@@ -21,33 +21,10 @@ border: 1px solid black; }
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="5" column="2">
-    <widget class="QSpinBox" name="dHeight"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Default Height:</string>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Default Width:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
-    <widget class="QSpinBox" name="dWidth"/>
-   </item>
-   <item row="7" column="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -58,12 +35,8 @@ border: 1px solid black; }
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
+   <item row="4" column="2">
+    <widget class="QSpinBox" name="dWidth"/>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
@@ -77,6 +50,50 @@ border: 1px solid black; }
       <bool>false</bool>
      </property>
     </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="labelHeight">
+     <property name="text">
+      <string>Default Height:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QSpinBox" name="nRule">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>256</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="labelRule">
+     <property name="text">
+      <string>Rule:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QSpinBox" name="dHeight"/>
    </item>
    <item row="1" column="2">
     <widget class="QComboBox" name="comboBox">
@@ -97,20 +114,23 @@ border: 1px solid black; }
      </item>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_5">
+   <item row="6" column="2">
+    <widget class="QSpinBox" name="nbMinVoisins"/>
+   </item>
+   <item row="7" column="2">
+    <widget class="QSpinBox" name="nbMaxVoisins"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="labelMin">
      <property name="text">
-      <string>Rule:</string>
+      <string>Nombre minimum de voisins</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QSpinBox" name="nRule">
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>256</number>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelMax">
+     <property name="text">
+      <string>Nombre maximum de voisins</string>
      </property>
     </widget>
    </item>
