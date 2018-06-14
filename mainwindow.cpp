@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     setCentralWidget(ui->scrollArea);
-
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
     QObject::connect(ui->actionplay, &QAction::toggled,renderArea , &RenderArea::playIsChecked);
@@ -23,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(renderArea, &RenderArea::pause ,this, &MainWindow::pause);
     QObject::connect(newCellDialog, &NewAutoCell::accepted,this ,&MainWindow::createNewAutoCell );
     QObject::connect(openCellDialog, &OpenAutoCell::accepted, this, &MainWindow::openAutoCell);
+    QObject::connect(ui->actionSave_AutoCell, &QAction::triggered, this, &MainWindow::saveAutoCell);
 
 
 }
@@ -58,19 +58,42 @@ void MainWindow::createNewAutoCell()
 }
 
 void MainWindow::openAutoCell(){
-    Xml_Dom dom(openCellDialog->getFileName());
-    qDebug(openCellDialog->getFileName().toLatin1());
+    Xml_Dom dom;
+    dom.readFile(openCellDialog->getFileName());
+    //qDebug(openCellDialog->getFileName().toLatin1());
     openCellDialog->setFile(&dom);
-    qDebug() << dom.getNoeud("type");
+    //qDebug() << dom.getNoeud("type");
     if(openCellDialog->getFile().getNoeud("type") == "oneD")
         renderArea->setAutoCell(new OneD(openCellDialog->getFile().getNoeud("width").toInt()));
     else if (openCellDialog->getFile().getNoeud("type") == "jeuVie")
-        renderArea->setAutoCell(new jeuVie(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
+        renderArea->setAutoCell(new jeuVie(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt(), 10, 10, openCellDialog->getFile().getNoeud("nbMinVoisins").toInt(), openCellDialog->getFile().getNoeud("nbMaxVoisins").toInt() ));
     else if (openCellDialog->getFile().getNoeud("type") == "quadLife")
-        renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt()));
+        renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt(), 10, 10, openCellDialog->getFile().getNoeud("nbMinVoisins").toInt(), openCellDialog->getFile().getNoeud("nbMaxVoisins").toInt()));
     else
         qDebug("échec de la quête");
-    qDebug() << renderArea->getAutoCell()->getWidth();
+    //qDebug() << renderArea->getAutoCell()->getWidth();
+}
+
+void MainWindow::saveAutoCell(){
+    Xml_Dom dom;
+    if(newCellDialog->getType()=="Simple one dimension"){
+        dom.setNoeud("type", "oneD");
+    }
+    else if (newCellDialog->getType()=="Game of life"){
+        dom.setNoeud("type", "jeuVie");
+        dom.setNoeud("nbMaxVoisins", QString::number(newCellDialog->getNbMaxVoisins()));
+        dom.setNoeud("nbMinVoisins", QString::number(newCellDialog->getNbMinVoisins()));
+    }
+    else{
+        dom.setNoeud("type", "quadLife");
+        dom.setNoeud("nbMaxVoisins", QString::number(newCellDialog->getNbMaxVoisins()));
+        dom.setNoeud("nbMinVoisins", QString::number(newCellDialog->getNbMinVoisins()));
+    }
+    dom.setNoeud("width", QString::number(newCellDialog->getWidth()));
+    dom.setNoeud("height", QString::number(newCellDialog->getHeight()) );
+    dom.setNoeud("rule", QString::number(newCellDialog->getRule()));
+
+    dom.writeFile(newCellDialog->getName());
 }
 
 

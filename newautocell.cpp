@@ -5,6 +5,7 @@ NewAutoCell::NewAutoCell(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewAutoCell)
 {
+    //ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     ui->setupUi(this);
     if(ui->comboBox->currentText()=="Simple one dimension")
     {
@@ -12,6 +13,7 @@ NewAutoCell::NewAutoCell(QWidget *parent) :
      ui->dHeight->setEnabled(false);
     }
     QObject::connect(ui->comboBox, &QComboBox::currentTextChanged,this ,&NewAutoCell::typeChanged );
+    QObject::connect(ui->lineEdit, &QLineEdit::textChanged, this, &NewAutoCell::nameChanged);
 
 }
 
@@ -40,6 +42,14 @@ void NewAutoCell::typeChanged(QString s){
        ui->dHeight->setEnabled(true);
    }
 
+}
+
+void NewAutoCell::nameChanged()
+{
+    /*if(ui->lineEdit->text()=="")
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    else
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);*/
 }
 
 QString NewAutoCell::getType() const

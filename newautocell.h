@@ -2,6 +2,7 @@
 #define NEWAUTOCELL_H
 
 #include <QDialog>
+#include <QPushButton>
 
 namespace Ui {
 class NewAutoCell;
@@ -33,7 +34,7 @@ public:
 
 public slots:
     void typeChanged(QString s);
-
+    void nameChanged();
 
 private:
     Ui::NewAutoCell *ui;

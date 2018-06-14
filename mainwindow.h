@@ -29,6 +29,7 @@ public slots:
     void pause();
     void createNewAutoCell();
     void openAutoCell();
+    void saveAutoCell();
 };
 
 #endif // MAINWINDOW_H
