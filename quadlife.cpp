@@ -35,6 +35,8 @@ void QuadLife::changeCellState(QPoint point)
 
 void QuadLife::nextState()
 {
+	if(currentState == 0)
+		etatInitial = etats[0];
 	Etat etat(height, width);
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){

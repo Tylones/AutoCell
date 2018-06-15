@@ -183,6 +183,14 @@ void RenderArea::generate_randomly()
 	update();
 }
 
+void RenderArea::reinit()
+{
+	if(autoCell){
+		autoCell->reinit();
+		update();
+	}
+}
+
 
 void RenderArea::mousePressEvent(QMouseEvent* ev)
 {

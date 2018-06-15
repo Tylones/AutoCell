@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vitesseSlider->setMinimumWidth(200);
     vitesseSlider->setMaximumWidth(250);
     vitesseSlider->setRange(1,500);
-    vitesseSlider->setValue(250);
+	vitesseSlider->setValue(400);
     ui->mainToolBar->addWidget(vitesseSlider);
     QObject::connect(ui->actionNew_AutoCell, &QAction::triggered, newCellDialog ,&NewAutoCell::show );
     QObject::connect(ui->actionOpen_AutoCell, &QAction::triggered, openCellDialog, &OpenAutoCell::show);
@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(openCellDialog, &OpenAutoCell::accepted, this, &MainWindow::openAutoCell);
     QObject::connect(ui->actionSave_AutoCell, &QAction::triggered, this, &MainWindow::saveAutoCell);
     QObject::connect(vitesseSlider, &QSlider::valueChanged, renderArea, &RenderArea::changeVitesse);
+	QObject::connect(ui->actionreinit, &QAction::triggered, renderArea, &RenderArea::reinit);
+
+	renderArea->changeVitesse(vitesseSlider->value());
 
 
 }

@@ -27,13 +27,16 @@ void jeuVie::changeCellState(const QPoint point)
 }
 
 void jeuVie::nextState()
-{
+{	
+	if(currentState == 0)
+		etatInitial = etats[0];
 	Etat etat(height, width);
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
 			etat.setValue(i,j,willBorn(i,j,etats[(currentState)%nbMaxEtats]));
 		}
     }
+
 	currentState++;
 
     if(currentState<nbMaxEtats)

@@ -60,6 +60,15 @@ void AutoCell::setCellHeight(int value)
 	cellHeight = value;
 }
 
+void AutoCell::reinit()
+{
+	while(!etats.isEmpty())
+		etats.pop_front();
+	Etat e = etatInitial;
+	etats.push_back(e);
+	currentState=0;
+}
+
 void AutoCell::previous()
 {
 	if(currentState>1)

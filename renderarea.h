@@ -32,6 +32,7 @@ public slots:
     void play();
     void playIsChecked(bool checked);
 	void generate_randomly();
+	void reinit();
 
 signals:
      void pause();

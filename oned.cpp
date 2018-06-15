@@ -83,6 +83,8 @@ OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_
 
 void OneD::nextState()
 {
+	if(currentState == 0)
+		etatInitial = etats[0];
 	currentState++;
     height++;
     Etat etat(1,width);
