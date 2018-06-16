@@ -67,10 +67,18 @@ void OneD::generateRandomly()
 		for(int j = 0; j < width; j++){
 		  etats.last().setValue(i,j,rand()%2);
 		}
-	  }
+	}
 }
 
-OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r,int nb_neighborhood):AutoCell(width,1,cellWidth,cellHeight,cellStates,nb_neighborhood),rule(QVector<int>(8))
+int OneD::getRule() const
+{
+	int n;
+	for(int i = 0; i < rule.size(); i++)
+		n += pow(2, i*rule[rule.size()-i]);
+	return n;
+}
+
+OneD::OneD(int width, int cellWidth, int cellHeight, int cellStates, int r, int nb_neighborhood, QString name):AutoCell(width,1,cellWidth,cellHeight,cellStates,nb_neighborhood,name),rule(QVector<int>(8))
 {
     for(int i=0;i<8;i++)
     rule[7-i]=rulesTab[r][i][0];

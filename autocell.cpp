@@ -1,6 +1,9 @@
 #include "autocell.h"
 
-AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(0),etats(0),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1)))
+AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int nb_neighborhood, QString name):
+	width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),
+	currentState(0),etats(0),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1))),
+	name(name)
 {
     if(height>1)
     {
@@ -60,6 +63,11 @@ void AutoCell::setCellHeight(int value)
 	cellHeight = value;
 }
 
+void AutoCell::setValueEtat(int numEtat, int i, int j, int val)
+{
+	etats[numEtat].setValue(i,j,val);
+}
+
 void AutoCell::reinit()
 {
 	while(!etats.isEmpty())
@@ -103,4 +111,14 @@ QVector<Etat> AutoCell::getEtats() const
 void AutoCell::setEtats(const QVector<Etat> &value)
 {
     etats = value;
+}
+
+QString AutoCell::getName() const
+{
+	return name;
+}
+
+void AutoCell::setName(const QString &value)
+{
+	name = value;
 }

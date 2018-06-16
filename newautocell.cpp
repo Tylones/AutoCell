@@ -21,6 +21,7 @@ NewAutoCell::NewAutoCell(QWidget *parent) :
 		ui->nbMaxVoisins->setVisible(false);
 
 	}
+	ui->lineEdit->setText("Automate");
 	QObject::connect(ui->comboBox, &QComboBox::currentTextChanged,this ,&NewAutoCell::typeChanged );
   QObject::connect(ui->lineEdit, &QLineEdit::textChanged, this, &NewAutoCell::nameChanged);
 

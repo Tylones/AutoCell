@@ -3,7 +3,7 @@
 
 
 
-QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbMinVoisins, int nbMaxVoisins) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
+QuadLife::QuadLife(int height, int width, int cellWidth, int cellHeight, int nbMinVoisins, int nbMaxVoisins, QString name) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3, name), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
 {
 
     for(int i = 0; i < height; i++){
@@ -137,4 +137,24 @@ bool QuadLife::willBorn(int x, int y, Etat etat)
 	//return((etat.getMatrice()[x][y]!=2 && (n == 2 || n == 3)) || (etat.getMatrice()[x][y]==2 && n == 3));
 	return((etat.getMatrice()[x][y]!=2 && (n >= nbMinVoisins && n <= nbMaxVoisins)) || (etat.getMatrice()[x][y]==2 && n == nbMaxVoisins));
 
+}
+
+int QuadLife::getNbMaxVoisins() const
+{
+	return nbMaxVoisins;
+}
+
+void QuadLife::setNbMaxVoisins(int value)
+{
+	nbMaxVoisins = value;
+}
+
+int QuadLife::getNbMinVoisins() const
+{
+	return nbMinVoisins;
+}
+
+void QuadLife::setNbMinVoisins(int value)
+{
+	nbMinVoisins = value;
 }

@@ -32,6 +32,8 @@ public slots:
     void createNewAutoCell();
     void openAutoCell();
     void saveAutoCell();
+	void saveAutoCellQuit();
+	void openContextAutoCell();
 };
 
 #endif // MAINWINDOW_H
