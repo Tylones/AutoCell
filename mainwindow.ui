@@ -28,7 +28,7 @@
            <x>0</x>
            <y>0</y>
            <width>934</width>
-           <height>530</height>
+           <height>533</height>
           </rect>
          </property>
         </widget>
@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>956</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -53,6 +53,7 @@
     </property>
     <addaction name="actionNew_AutoCell"/>
     <addaction name="actionOpen_AutoCell"/>
+    <addaction name="actionSave_Automate"/>
     <addaction name="actionSave_AutoCell"/>
     <addaction name="separator"/>
     <addaction name="actionprint"/>
@@ -162,7 +163,7 @@
   </action>
   <action name="actionSave_AutoCell">
    <property name="text">
-    <string>Save</string>
+    <string>Save config</string>
    </property>
   </action>
   <action name="actionconfig">
@@ -223,6 +224,11 @@
   <action name="actiongenerate_randomly">
    <property name="text">
     <string>generate randomly</string>
+   </property>
+  </action>
+  <action name="actionSave_Automate">
+   <property name="text">
+    <string>Save AutoCell</string>
    </property>
   </action>
  </widget>

@@ -149,6 +149,12 @@ void QuadLife::setNbMaxVoisins(int value)
 	nbMaxVoisins = value;
 }
 
+void QuadLife::previous()
+{
+	if(currentState>1)
+		currentState--;
+}
+
 int QuadLife::getNbMinVoisins() const
 {
 	return nbMinVoisins;

@@ -19,7 +19,7 @@ public:
 	int getNbMaxVoisins() const;
 	void setNbMaxVoisins(int value);
 
-
+	void previous();
 
 private:
 	bool willBorn(int x, int y, Etat etat);

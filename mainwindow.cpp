@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QtGlobal>
 #include <typeinfo>
+#include <QRegExp>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	QObject::connect(ui->actionSave_AutoCell, &QAction::triggered, this, &MainWindow::saveAutoCell);
 	QObject::connect(vitesseSlider, &QSlider::valueChanged, renderArea, &RenderArea::changeVitesse);
 	QObject::connect(ui->actionreinit, &QAction::triggered, renderArea, &RenderArea::reinit);
+	QObject::connect(ui->actionSave_Automate, &QAction::triggered, this, &MainWindow::saveAutoCellandState);
 
 	renderArea->changeVitesse(vitesseSlider->value());
 
@@ -76,14 +78,43 @@ void MainWindow::openAutoCell(){
 	//qDebug(openCellDialog->getFileName().toLatin1());
 	openCellDialog->setFile(&dom);
 	//qDebug() << dom.getNoeud("type");
-	if(openCellDialog->getFile().getNoeud("type") == "oneD")
-		renderArea->setAutoCell(new OneD(openCellDialog->getFile().getNoeud("width").toInt()));
-	else if (openCellDialog->getFile().getNoeud("type") == "jeuVie")
-		renderArea->setAutoCell(new jeuVie(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt(), 10, 10, openCellDialog->getFile().getNoeud("nbMinVoisins").toInt(), openCellDialog->getFile().getNoeud("nbMaxVoisins").toInt() ));
-	else if (openCellDialog->getFile().getNoeud("type") == "quadLife")
-		renderArea->setAutoCell(new QuadLife(openCellDialog->getFile().getNoeud("height").toInt(), openCellDialog->getFile().getNoeud("width").toInt(), 10, 10, openCellDialog->getFile().getNoeud("nbMinVoisins").toInt(), openCellDialog->getFile().getNoeud("nbMaxVoisins").toInt()));
-	else
-		qDebug("échec de la quête");
+	QRegExp reg(".+_plus_state.xml");
+	if(dom.getNoeud("type") == "oneD"){
+		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),10,10,2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
+		if(reg.exactMatch(openCellDialog->getFileName())){
+			renderArea->getAutoCell()->setCurrentState(dom.getNoeud("currentState").toInt());
+			for(int i = 0; i <= renderArea->getAutoCell()->getCurrentState(); i++){
+				for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+					renderArea->getAutoCell()->setValueEtat(i,0,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+				}
+			}
+		}
+		ui->actionprevious->setVisible(false);
+
+	}
+	else if (dom.getNoeud("type") == "jeuVie"){
+		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name") ));
+		if(reg.exactMatch(openCellDialog->getFileName())){
+			for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
+				for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+					renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+				}
+			}
+		}
+		ui->actionprevious->setVisible(true);
+
+	}else if (dom.getNoeud("type") == "quadLife"){
+		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(), dom.getNoeud("name")));
+		if(reg.exactMatch(openCellDialog->getFileName())){
+			for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
+				for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+					renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+				}
+			}
+		}
+		ui->actionprevious->setVisible(true);
+
+	}
 	//qDebug() << renderArea->getAutoCell()->getWidth();
 }
 
@@ -108,6 +139,49 @@ void MainWindow::saveAutoCell(){
 	dom.setNoeud("height", QString::number(renderArea->getAutoCell()->getHeight()) );
 	dom.setNoeud("name",renderArea->getAutoCell()->getName());
 	dom.writeFile(renderArea->getAutoCell()->getName());
+}
+
+
+void MainWindow::saveAutoCellandState()
+{
+	Xml_Dom dom;
+	if(typeid(*(renderArea->getAutoCell())).name() == typeid(OneD).name()){
+		dom.setNoeud("type", "oneD");
+		dom.setNoeud("rule", QString::number(((OneD*) renderArea->getAutoCell())->getRule()));
+		dom.setNoeud("currentState", QString::number(renderArea->getAutoCell()->getCurrentState()));
+		for(int i = 0; i < renderArea->getAutoCell()->getEtats().size(); i++){
+			for(int j = 0; j < renderArea->getAutoCell()->getEtats()[i].getMatrice()[0].size(); j++){
+				dom.setNoeud("value_" + QString::number(i) +"_"+ QString::number(j),QString::number(renderArea->getAutoCell()->getEtats()[i].getMatrice()[0][j]));
+			}
+		}
+	}
+	else{
+		if (typeid(*(renderArea->getAutoCell())).name() == typeid(jeuVie).name()){
+			dom.setNoeud("type", "jeuVie");
+			dom.setNoeud("nbMaxVoisins", QString::number(((jeuVie*) renderArea->getAutoCell())->getNbMaxVoisins()));
+			dom.setNoeud("nbMinVoisins", QString::number(((jeuVie*) renderArea->getAutoCell())->getNbMinVoisins()));
+
+		}
+		else{
+			dom.setNoeud("type", "quadLife");
+			dom.setNoeud("nbMaxVoisins", QString::number(((QuadLife*) renderArea->getAutoCell())->getNbMaxVoisins()));
+			dom.setNoeud("nbMinVoisins", QString::number(((QuadLife*) renderArea->getAutoCell())->getNbMinVoisins()));
+
+		}
+
+
+		Etat e = renderArea->getAutoCell()->getEtats()[renderArea->getAutoCell()->getCurrentState()%10];
+		for(int i = 0; i < e.getMatrice().size(); i++){
+			for(int j = 0; j < e.getMatrice()[i].size(); j++){
+				dom.setNoeud("value_" + QString::number(i) +"_"+ QString::number(j),QString::number(e.getMatrice()[i][j]));
+			}
+		}
+
+	}
+	dom.setNoeud("width", QString::number(renderArea->getAutoCell()->getWidth()));
+	dom.setNoeud("height", QString::number(renderArea->getAutoCell()->getHeight()) );
+	dom.setNoeud("name",renderArea->getAutoCell()->getName());
+	dom.writeFile(renderArea->getAutoCell()->getName()+"_plus_state");
 }
 
 void MainWindow::saveAutoCellQuit()
@@ -166,6 +240,7 @@ void MainWindow::openContextAutoCell(){
 	//qDebug(openCellDialog->getFileName().toLatin1());
 	//qDebug() << dom.getNoeud("type");
 	if(dom.getNoeud("type") == "oneD"){
+		ui->actionprevious->setVisible(true);
 		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),10,10,2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
 		renderArea->getAutoCell()->setCurrentState(dom.getNoeud("currentState").toInt());
 		for(int i = 0; i <= renderArea->getAutoCell()->getCurrentState(); i++){
@@ -190,8 +265,7 @@ void MainWindow::openContextAutoCell(){
 				renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
 			}
 		}
-	}else
-		qDebug("échec de la quête");
+	}
 
 
 

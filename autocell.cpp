@@ -79,11 +79,6 @@ void AutoCell::reinit()
 	currentState=0;
 }
 
-void AutoCell::previous()
-{
-	if(currentState>1)
-		currentState--;
-}
 
 QVector<QVector<int> > AutoCell::getNeighborhood() const
 {

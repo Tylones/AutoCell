@@ -70,6 +70,13 @@ void OneD::generateRandomly()
 	}
 }
 
+void OneD::previous()
+{
+	if(currentState>1)
+		currentState--;
+	etats.pop_back();
+}
+
 int OneD::getRule() const
 {
 	int n =0;

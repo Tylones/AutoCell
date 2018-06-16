@@ -30,10 +30,7 @@ public:
 
 	void reinit();
 
-	void previous();
-
-
-
+	virtual	void previous() = 0;
 
 
 

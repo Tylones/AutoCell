@@ -91,6 +91,12 @@ void jeuVie::setNbMaxVoisins(int value)
 	nbMaxVoisins = value;
 }
 
+void jeuVie::previous()
+{
+	if(currentState>1)
+		currentState--;
+}
+
 int jeuVie::getNbMinVoisins() const
 {
 	return nbMinVoisins;

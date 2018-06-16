@@ -32,6 +32,7 @@ public slots:
     void createNewAutoCell();
     void openAutoCell();
     void saveAutoCell();
+	void saveAutoCellandState();
 	void saveAutoCellQuit();
 	void openContextAutoCell();
 };
