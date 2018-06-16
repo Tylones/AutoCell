@@ -59,8 +59,6 @@ protected:
 	QString name;
     int width;
     int height;
-    int cellWidth;
-    int cellHeight;
     int cellStates;
     int currentState;
     QVector< QVector <int> > neighborhood;
