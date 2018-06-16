@@ -26,8 +26,22 @@ void RenderArea::drawOneD(QPainter &painter)
 
         if(etats.last().getMatrice().size()==1){
 
-			int cellHeight =(height() / (autoCell->getEtats().size()));
-			int cellWidth =(width() / (autoCell->getWidth()));
+
+            double cellHeight =0;
+            double cellWidth= 0;
+            cellWidth=(double)width()/(double)(autoCell->getWidth());
+            cellHeight=cellWidth;
+            qDebug() <<  cellHeight << "//::" << cellWidth;
+
+
+                 if(autoCell->getCurrentState() * cellHeight > height())
+                 {
+                    cellHeight=(double)height()/(double)(autoCell->getCurrentState());
+                    cellWidth=cellHeight;
+
+                 }
+
+
 
             for(int j =0; j < etats.size(); j++){
                 mat=etats[j].getMatrice();
@@ -61,10 +75,9 @@ void RenderArea::drawOneD(QPainter &painter)
                         painter.setBrush(Qt::black);
                         painter.setPen(Qt::black);
                     }
-					if(10* autoCell->getEtats().size() > height())
+
 						painter.drawRect((k) * cellWidth, j*cellHeight,cellWidth ,cellHeight);
-					else
-						painter.drawRect((k) * cellWidth, j*10, cellWidth,10);
+
                 }
 
             }

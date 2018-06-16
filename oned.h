@@ -3,6 +3,7 @@
 #include "autocell.h"
 #include <QVector>
 #include <QDebug>
+#include<cmath>
 
 class OneD : public AutoCell
 {
