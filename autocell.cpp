@@ -1,19 +1,27 @@
 #include "autocell.h"
 
-AutoCell::AutoCell(int width,int height, int cellWidth, int cellHeight,int cellStates,int currentState):width(width),height(height),cellWidth(cellWidth),cellHeight(cellHeight),cellStates(cellStates),currentState(currentState),matrice(QVector< QVector <int> >(width, QVector<int>(height))),neighborhood(QVector< QVector <int> >(2, QVector<int>(1)))
+AutoCell::AutoCell(int width,int height, int cellStates,int nb_neighborhood, QString name):
+	width(width),height(height),cellStates(cellStates),
+	currentState(0),etats(0),neighborhood(QVector< QVector <int> >(nb_neighborhood, QVector<int>(1))),
+	name(name)
 {
+    if(height>1)
+    {
+        neighborhood.push_back(QVector<int>(nb_neighborhood));
+    }
 
+	etats.push_back(Etat(height,width));
 }
 
 QVector<QVector<int> >AutoCell::getMatrice() const
 {
-    return matrice;
+	return etats.last().getMatrice();
 }
 
-void AutoCell::setMatrice(const QVector<QVector<int> > &value)
-{
-    matrice = value;
-}
+//void AutoCell::setMatrice(const QVector<QVector<int> > &value)
+//{
+//    matrice = value;
+//}
 
 int AutoCell::getWidth() const
 {
@@ -52,8 +60,25 @@ int AutoCell::getCellHeight() const
 
 void AutoCell::setCellHeight(int value)
 {
-    cellHeight = value;
+	cellHeight = value;
 }
+
+void AutoCell::setValueEtat(int numEtat, int i, int j, int val)
+{
+	if(numEtat >= etats.size())
+		etats.push_back(Etat(etats[0].getMatrice().size(),etats[0].getMatrice()[0].size()));
+	etats[numEtat].setValue(i,j,val);
+}
+
+void AutoCell::reinit()
+{
+	while(!etats.isEmpty())
+		etats.pop_front();
+	Etat e = etatInitial;
+	etats.push_back(e);
+	currentState=0;
+}
+
 
 QVector<QVector<int> > AutoCell::getNeighborhood() const
 {
@@ -73,4 +98,24 @@ int AutoCell::getCurrentState() const
 void AutoCell::setCurrentState(int value)
 {
     currentState = value;
+}
+
+QVector<Etat> AutoCell::getEtats() const
+{
+    return etats;
+}
+
+void AutoCell::setEtats(const QVector<Etat> &value)
+{
+    etats = value;
+}
+
+QString AutoCell::getName() const
+{
+	return name;
+}
+
+void AutoCell::setName(const QString &value)
+{
+	name = value;
 }

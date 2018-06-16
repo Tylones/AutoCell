@@ -6,32 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>346</height>
+    <width>956</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>AutoCell</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>551</width>
-         <height>255</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3"/>
-      </widget>
-     </widget>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>934</width>
+           <height>533</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -40,55 +43,198 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>571</width>
-     <height>22</height>
+     <width>956</width>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
     <property name="title">
      <string>&amp;file</string>
     </property>
+    <addaction name="actionNew_AutoCell"/>
+    <addaction name="actionOpen_AutoCell"/>
+    <addaction name="actionSave_Automate"/>
+    <addaction name="actionSave_AutoCell"/>
+    <addaction name="separator"/>
+    <addaction name="actionprint"/>
    </widget>
    <widget class="QMenu" name="menu_play">
     <property name="title">
      <string>action</string>
     </property>
     <addaction name="actionplay"/>
-    <addaction name="actionpause"/>
     <addaction name="actionnext"/>
+    <addaction name="actionreinit"/>
+    <addaction name="actionprevious"/>
+    <addaction name="actiongenerate_randomly"/>
+   </widget>
+   <widget class="QMenu" name="menuedit">
+    <property name="title">
+     <string>edit</string>
+    </property>
+    <addaction name="actionconfig"/>
+    <addaction name="actiondraw_grid"/>
+    <addaction name="actioninit"/>
+   </widget>
+   <widget class="QMenu" name="menuzoom">
+    <property name="title">
+     <string>zoom</string>
+    </property>
+    <addaction name="actionauto"/>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
    </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_play"/>
+   <addaction name="menuedit"/>
+   <addaction name="menuzoom"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolBar { background-color: rgb(51, 51, 51);  border: 1px solid black;}</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+    <enum>BottomToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
+   <addaction name="actionprevious"/>
    <addaction name="actionplay"/>
-   <addaction name="actionpause"/>
    <addaction name="actionnext"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionplay">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/new/icons/Resources/play.png</normaloff>
+     <normalon>:/new/icons/Resources/pause.png</normalon>:/new/icons/Resources/play.png</iconset>
+   </property>
    <property name="text">
     <string>play</string>
    </property>
-  </action>
-  <action name="actionpause">
-   <property name="text">
-    <string>pause</string>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;play&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
   <action name="actionnext">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/new/icons/Resources/next.png</normaloff>:/new/icons/Resources/next.png</iconset>
+   </property>
    <property name="text">
     <string>next</string>
    </property>
   </action>
+  <action name="actionNew_AutoCell">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionOpen_AutoCell">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave_AutoCell">
+   <property name="text">
+    <string>Save config</string>
+   </property>
+  </action>
+  <action name="actionconfig">
+   <property name="text">
+    <string>config</string>
+   </property>
+  </action>
+  <action name="actionreinit">
+   <property name="text">
+    <string>reinit</string>
+   </property>
+  </action>
+  <action name="actiondraw_grid">
+   <property name="text">
+    <string>draw grid</string>
+   </property>
+  </action>
+  <action name="actioninit">
+   <property name="text">
+    <string>init</string>
+   </property>
+  </action>
+  <action name="actionprint">
+   <property name="text">
+    <string>print</string>
+   </property>
+  </action>
+  <action name="actionauto">
+   <property name="text">
+    <string>auto</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionprevious">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/new/icons/Resources/previous.png</normaloff>:/new/icons/Resources/previous.png</iconset>
+   </property>
+   <property name="text">
+    <string>previous</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actiongenerate_randomly">
+   <property name="text">
+    <string>generate randomly</string>
+   </property>
+  </action>
+  <action name="actionSave_Automate">
+   <property name="text">
+    <string>Save AutoCell</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

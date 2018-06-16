@@ -51,8 +51,6 @@ QVector < QVector < QVector <int>> >OneD::makeRules(){
 
 }
 
-
-
 QVector<int> OneD::getRules() const
 {
     return rule;
@@ -60,63 +58,84 @@ QVector<int> OneD::getRules() const
 
 void OneD::setRules(const int n)
 {
-    rule = OneD::rulesTab[n][0];
+	rule = OneD::rulesTab[n][0];
 }
 
-void OneD::changeCellState(QPoint point){
-
-   if(point.x()/cellWidth < width && point.y()/cellHeight < height)
-   {
-    if( matrice[(point.x())/cellWidth][(point.y())/cellHeight]==1)
-       matrice[(point.x())/cellWidth][(point.y())/cellHeight]=0;
-    else
-       matrice[(point.x())/cellWidth][(point.y())/cellHeight]=1;
-   }
+void OneD::generateRandomly()
+{
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+		  etats.last().setValue(i,j,rand()%2);
+		}
+	}
 }
 
+void OneD::previous()
+{
+	if(currentState>1)
+		currentState--;
+	etats.pop_back();
+}
 
-OneD::OneD(int width, int cellWidth, int cellHeight,int cellStates,int r):AutoCell(width,1,cellWidth,cellHeight,cellStates),rule(QVector<int>(8))
+int OneD::getRule() const
+{
+	int n =0;
+	for(int i = 0; i < rule.size(); i++)
+		n +=  rule[i]*pow(2, i);
+	return n;
+}
+
+OneD::OneD(int width, int cellStates, int r, int nb_neighborhood, QString name):AutoCell(width,1,cellStates,nb_neighborhood,name),rule(QVector<int>(8))
 {
     for(int i=0;i<8;i++)
     rule[7-i]=rulesTab[r][i][0];
 
-
     neighborhood[0][0]=-1;
-    neighborhood[1][0]=1;
+    neighborhood[1][0]=0;
+    neighborhood[2][0]=1;
+
 }
 
 void OneD::nextState()
 {
-        for (int i=0; i<width; i++) {
-            int index;
-            if(i<1)
-                index=matrice[i][currentState]*2+matrice[i+1][currentState];
+	if(currentState == 0)
+		etatInitial = etats[0];
+	currentState++;
+    height++;
+    Etat etat(1,width);
+    QVector<QVector <int>> lastMat= etats.last().getMatrice();
 
+	for(int i = 0; i < width; i++){
+		int index;
+		if(i==0)
+            index = lastMat[0][i]*2 + lastMat[0][i+1];
+		else if(i == width-1)
+            index = lastMat[0][i - 1]*4 + lastMat[0][i]*2;
+		else
+            index = lastMat[0][i - 1]*4 + lastMat[0][i]*2 + lastMat[0][i+1];
+        etat.setValue(0,i,rule[index]);
+	}
 
-             else if(i>=(width-2))
-                index =matrice[i-1][currentState]*4+matrice[i][currentState]*2;
-
-              else
-                 index=matrice[i-1][currentState]*4+matrice[i][currentState]*2+matrice[i+1][currentState];
-
-            matrice[i].push_back(rule[index]);
-
-        }
-        currentState++;
-        height++;
-
-        if(matrice[1][currentState]==1)
-        {
-
-                width++;
-
-            matrice.push_front(QVector <int>(height));
-              }
-
-
-            if(matrice[width-1][currentState]==1)
-            { width++;
-                 matrice.push_back(QVector <int>(height));
-            }
+	etats.push_back(etat);
 
 }
+
+void OneD::changeCellState(const QPoint point)
+{
+
+   if(point.x() < width && point.y() < height)
+   {
+	   int x = point.x();
+	   int y = point.y();
+	   if(etats.last().getMatrice()[y][x]==1)
+		   etats.last().setValue(y,x,0);
+
+	   else{
+		   //etats.last().getMatrice()[(point.x())/cellWidth][(point.y())/cellHeight]=1;
+
+		   etats.last().setValue(y,x,1);
+
+	   }
+   }
+}
+

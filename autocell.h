@@ -3,13 +3,14 @@
 
 #include <QVector>
 #include <QPoint>
+#include "etat.h"
 
 class AutoCell
 {
 
 public:
     QVector<QVector<int> > getMatrice() const;
-    AutoCell(int width = 10,int height=10, int cellWidth=10, int cellHeight=10,int cellStates=2,int currentState=0);
+	AutoCell(int width = 10, int height=10, int cellStates=2, int nb_neighborhood=3, QString name="");
 
     void setMatrice(const QVector<QVector<int> > &value);
 
@@ -25,6 +26,14 @@ public:
     int getCellHeight() const;
     void setCellHeight(int value);
 
+	void setValueEtat(int numEtat, int i, int j, int val);
+
+	void reinit();
+
+	virtual	void previous() = 0;
+
+
+
     QVector<QVector<int> > getNeighborhood() const;
     void setNeighborhood(const QVector<QVector<int> > &value);
 
@@ -35,13 +44,21 @@ public:
     int getCurrentState() const;
     void setCurrentState(int value);
 
+	QVector<Etat> getEtats() const;
+    void setEtats(const QVector<Etat> &value);
+	virtual void generateRandomly() = 0;
+	const static int nbMaxEtats = 10;
+
+	QString getName() const;
+	void setName(const QString &value);
+
 protected:
 
-    QVector< QVector <int> > matrice;
+	QVector< Etat > etats;
+	Etat etatInitial;
+	QString name;
     int width;
     int height;
-    int cellWidth;
-    int cellHeight;
     int cellStates;
     int currentState;
     QVector< QVector <int> > neighborhood;

@@ -5,7 +5,10 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+CONFIG += c++11
+QT += xml
+QMAKE_CXXFLAGS = -std=c++11
+QMAKE_LFLAGS = -std=c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AutoCell
@@ -29,14 +32,31 @@ SOURCES += \
     renderarea.cpp \
     autocell.cpp \
     oned.cpp \
-    sleeper.cpp
+    sleeper.cpp \
+    newautocell.cpp \
+    etat.cpp \
+    quadlife.cpp \
+    jeuvie.cpp \
+    openautocell.cpp \
+    xmldom.cpp
 
 HEADERS += \
         mainwindow.h \
     renderarea.h \
     autocell.h \
     oned.h \
-    sleeper.h
+    sleeper.h \
+    newautocell.h \
+    etat.h \
+    quadlife.h \
+    jeuvie.h \
+    openautocell.h \
+    xmldom.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    newautocell.ui \
+    openautocell.ui
+
+RESOURCES += \
+    ressources.qrc
