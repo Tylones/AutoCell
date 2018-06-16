@@ -19,8 +19,8 @@ public:
 
     QSize minimumSizeHint() const override;
     QSize sizeHint() const override;
-    void drawOneD(QPainter &painter);
-    void drawOneD(QPainter &painter,int state);
+	void drawAutoCell(QPainter &painter);
+	void drawAutoCell(QPainter &painter,int state);
 
 	AutoCell *getAutoCell() const;
 	void setAutoCell(AutoCell *value);

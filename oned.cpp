@@ -85,7 +85,7 @@ int OneD::getRule() const
 	return n;
 }
 
-OneD::OneD(int width, int cellWidth, int cellHeight, int cellStates, int r, int nb_neighborhood, QString name):AutoCell(width,1,cellWidth,cellHeight,cellStates,nb_neighborhood,name),rule(QVector<int>(8))
+OneD::OneD(int width, int cellStates, int r, int nb_neighborhood, QString name):AutoCell(width,1,cellStates,nb_neighborhood,name),rule(QVector<int>(8))
 {
     for(int i=0;i<8;i++)
     rule[7-i]=rulesTab[r][i][0];

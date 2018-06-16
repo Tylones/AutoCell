@@ -18,7 +18,7 @@ QSize RenderArea::minimumSizeHint() const
 	return QSize(400,200);
 }
 
-void RenderArea::drawOneD(QPainter &painter)
+void RenderArea::drawAutoCell(QPainter &painter)
 {
     if(autoCell!=nullptr){
         QVector < Etat > etats=autoCell->getEtats();
@@ -145,7 +145,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 
         qDebug() << width() << "//"<< height() << "//" << autoCell->getCellWidth() <<"//" <<autoCell->getWidth() << "//" << autoCell->getCurrentState() << "//" << autoCell->getCellHeight() << "//" << autoCell->getHeight() << zoom;
 		painter.scale(zoom,zoom);*/
-		drawOneD(painter);
+		drawAutoCell(painter);
 	}
 }
 

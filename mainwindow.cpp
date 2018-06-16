@@ -52,18 +52,18 @@ void MainWindow::createNewAutoCell()
 
 	if(newCellDialog->getType()=="Simple one dimension")
 	{
-		renderArea->setAutoCell(new OneD(newCellDialog->getWidth(),10,10,2,newCellDialog->getRule(),3,newCellDialog->getName()));
+		renderArea->setAutoCell(new OneD(newCellDialog->getWidth(),2,newCellDialog->getRule(),3,newCellDialog->getName()));
 
 	}
 	else if(newCellDialog->getType()=="Game of life")
 	{
-		renderArea->setAutoCell(new jeuVie(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins(),newCellDialog->getName()));
+		renderArea->setAutoCell(new jeuVie(newCellDialog->getHeight(),newCellDialog->getWidth(),newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins(),newCellDialog->getName()));
 		ui->actionprevious->setVisible(true);
 	}
 
 	else if(newCellDialog->getType()=="Quad life")
 	{
-		renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth(),10,10,newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins(),newCellDialog->getName()));
+		renderArea->setAutoCell(new QuadLife(newCellDialog->getHeight(),newCellDialog->getWidth(),newCellDialog->getNbMinVoisins(),newCellDialog->getNbMaxVoisins(),newCellDialog->getName()));
 		ui->actionprevious->setVisible(true);
 	}
 
@@ -80,7 +80,7 @@ void MainWindow::openAutoCell(){
 	//qDebug() << dom.getNoeud("type");
 	QRegExp reg(".+_plus_state.xml");
 	if(dom.getNoeud("type") == "oneD"){
-		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),10,10,2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
+		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
 		if(reg.exactMatch(openCellDialog->getFileName())){
 			renderArea->getAutoCell()->setCurrentState(dom.getNoeud("currentState").toInt());
 			for(int i = 0; i <= renderArea->getAutoCell()->getCurrentState(); i++){
@@ -93,7 +93,7 @@ void MainWindow::openAutoCell(){
 
 	}
 	else if (dom.getNoeud("type") == "jeuVie"){
-		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name") ));
+		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name") ));
 		if(reg.exactMatch(openCellDialog->getFileName())){
 			for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
 				for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
@@ -104,7 +104,7 @@ void MainWindow::openAutoCell(){
 		ui->actionprevious->setVisible(true);
 
 	}else if (dom.getNoeud("type") == "quadLife"){
-		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(), dom.getNoeud("name")));
+		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(), dom.getNoeud("name")));
 		if(reg.exactMatch(openCellDialog->getFileName())){
 			for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
 				for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
@@ -241,7 +241,7 @@ void MainWindow::openContextAutoCell(){
 	//qDebug() << dom.getNoeud("type");
 	if(dom.getNoeud("type") == "oneD"){
 		ui->actionprevious->setVisible(true);
-		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),10,10,2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
+		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
 		renderArea->getAutoCell()->setCurrentState(dom.getNoeud("currentState").toInt());
 		for(int i = 0; i <= renderArea->getAutoCell()->getCurrentState(); i++){
 			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
@@ -250,7 +250,7 @@ void MainWindow::openContextAutoCell(){
 		}
 	}
 	else if (dom.getNoeud("type") == "jeuVie"){
-		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
+		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
 		ui->actionprevious->setVisible(true);
 		for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
 			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
@@ -258,7 +258,7 @@ void MainWindow::openContextAutoCell(){
 			}
 		}
 	}else if (dom.getNoeud("type") == "quadLife"){
-		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
+		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
 		ui->actionprevious->setVisible(true);
 		for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
 			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){

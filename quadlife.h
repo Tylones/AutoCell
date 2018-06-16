@@ -17,7 +17,7 @@ Dans cet automate, voici ce à quoi correspondent les états :
 
 public:
 
-	QuadLife(int height = 100, int width=100, int cellWidth=10, int cellHeight=10,int nbMinVoisins=2,int nbMaxVoisins=3, QString name="");
+	QuadLife(int height = 100, int width=100, int nbMinVoisins=2,int nbMaxVoisins=3, QString name="");
 	void changeCellState(QPoint point);
 	void nextState();
 	void generateRandomly();

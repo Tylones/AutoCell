@@ -11,7 +11,7 @@ public:
 
 
 
-	OneD(int width=100, int cellWidth=10, int cellHeight=10,int nbEtats=2,int r=126,int nb_neighborhood=3, QString name="");
+	OneD(int width=100, int nbEtats=2,int r=126,int nb_neighborhood=3, QString name="");
 
     void changeCellState(const QPoint point);
     void nextState();

@@ -2,7 +2,7 @@
 
 
 
-jeuVie::jeuVie(int height, int width, int cellWidth, int cellHeight, int nbMinVoisins, int nbMaxVoisins, QString name) : AutoCell(width, height, cellWidth, cellHeight, cellStates,3, name), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
+jeuVie::jeuVie(int height, int width, int nbMinVoisins, int nbMaxVoisins, QString name) : AutoCell(width, height, cellStates,3, name), nbMinVoisins(nbMinVoisins), nbMaxVoisins(nbMaxVoisins)
 {
 
 }
