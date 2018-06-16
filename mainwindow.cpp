@@ -149,7 +149,14 @@ void MainWindow::saveAutoCellQuit()
 
 void MainWindow::openContextAutoCell(){
 	Xml_Dom dom;
+	QFile xml_doc("sauvegarde.xml");
+
+	if(!xml_doc.open(QIODevice::ReadOnly))
+	{
+		return;
+	}
 	dom.readFile("sauvegarde.xml");
+
 	//qDebug(openCellDialog->getFileName().toLatin1());
 	//qDebug() << dom.getNoeud("type");
 	if(dom.getNoeud("type") == "oneD")
