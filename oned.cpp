@@ -72,9 +72,9 @@ void OneD::generateRandomly()
 
 int OneD::getRule() const
 {
-	int n;
+	int n =0;
 	for(int i = 0; i < rule.size(); i++)
-		n += pow(2, i*rule[rule.size()-i]);
+		n +=  rule[i]*pow(2, i);
 	return n;
 }
 

@@ -116,6 +116,12 @@ void MainWindow::saveAutoCellQuit()
 	if(typeid(*(renderArea->getAutoCell())).name() == typeid(OneD).name()){
 		dom.setNoeud("type", "oneD");
 		dom.setNoeud("rule", QString::number(((OneD*) renderArea->getAutoCell())->getRule()));
+		dom.setNoeud("currentState", QString::number(renderArea->getAutoCell()->getCurrentState()));
+		for(int i = 0; i < renderArea->getAutoCell()->getEtats().size(); i++){
+			for(int j = 0; j < renderArea->getAutoCell()->getEtats()[i].getMatrice()[0].size(); j++){
+				dom.setNoeud("value_" + QString::number(i) +"_"+ QString::number(j),QString::number(renderArea->getAutoCell()->getEtats()[i].getMatrice()[0][j]));
+			}
+		}
 	}
 	else{
 		if (typeid(*(renderArea->getAutoCell())).name() == typeid(jeuVie).name()){
@@ -159,21 +165,34 @@ void MainWindow::openContextAutoCell(){
 
 	//qDebug(openCellDialog->getFileName().toLatin1());
 	//qDebug() << dom.getNoeud("type");
-	if(dom.getNoeud("type") == "oneD")
+	if(dom.getNoeud("type") == "oneD"){
 		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),10,10,2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
+		renderArea->getAutoCell()->setCurrentState(dom.getNoeud("currentState").toInt());
+		for(int i = 0; i <= renderArea->getAutoCell()->getCurrentState(); i++){
+			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+				renderArea->getAutoCell()->setValueEtat(i,0,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+			}
+		}
+	}
 	else if (dom.getNoeud("type") == "jeuVie"){
 		renderArea->setAutoCell(new jeuVie(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
 		ui->actionprevious->setVisible(true);
+		for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
+			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+				renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+			}
+		}
 	}else if (dom.getNoeud("type") == "quadLife"){
 		renderArea->setAutoCell(new QuadLife(dom.getNoeud("height").toInt(), dom.getNoeud("width").toInt(), 10, 10, dom.getNoeud("nbMinVoisins").toInt(), dom.getNoeud("nbMaxVoisins").toInt(),dom.getNoeud("name")));
 		ui->actionprevious->setVisible(true);
+		for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
+			for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
+				renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
+			}
+		}
 	}else
 		qDebug("échec de la quête");
-	for(int i = 0; i < renderArea->getAutoCell()->getHeight(); i++){
-		for(int j = 0; j < renderArea->getAutoCell()->getWidth(); j++){
-			renderArea->getAutoCell()->setValueEtat(0,i,j,dom.getNoeud("value_" + QString::number(i) + "_" + QString::number(j)).toInt());
-		}
-	}
+
 
 
 

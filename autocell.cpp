@@ -65,6 +65,8 @@ void AutoCell::setCellHeight(int value)
 
 void AutoCell::setValueEtat(int numEtat, int i, int j, int val)
 {
+	if(numEtat >= etats.size())
+		etats.push_back(Etat(etats[0].getMatrice().size(),etats[0].getMatrice()[0].size()));
 	etats[numEtat].setValue(i,j,val);
 }
 
