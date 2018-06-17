@@ -4,6 +4,11 @@
 #include <QVector>
 #include <QDebug>
 
+/*!
+ * \brief Cette classe est un automate cellulaire (donc héritant de la classe AutoCell) en 2 dimension
+ * représentant le jeu de la vie du mathématicien John Conway
+ */
+
 class jeuVie : public AutoCell
 {
 

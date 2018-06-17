@@ -8,7 +8,7 @@
 #include <QMap>
 
 /*!
-* \brief La classe Xml_Dom
+* \brief La classe est utilisée pour écrire et lire des fichiers XML
 *
 */
 class Xml_Dom : public QWidget
