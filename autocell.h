@@ -5,6 +5,12 @@
 #include <QPoint>
 #include "etat.h"
 
+
+/*!
+ * \brief Cette classe abstraite est la classe mère de tous les automates cellulaires,
+ * elle contient plusieurs attributs et méthodes nécessaires au bon fonctionnement de l'application
+ * et facilitant l'ajout de nouveaux automates cellulaires
+ */
 class AutoCell
 {
 

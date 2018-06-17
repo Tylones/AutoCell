@@ -5,6 +5,12 @@
 #include <QDebug>
 #include<cmath>
 
+/*!
+ * \brief Cette classe est un automate cellulaire (donc héritant de la classe AutoCell),
+ * se servant d'un numéro de règle allant de 0 à 255 pour calculer l'état de ses cellules
+ * lors de nouvelle générations
+ */
+
 class OneD : public AutoCell
 {
 public:

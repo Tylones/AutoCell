@@ -11,6 +11,12 @@
 #include "sleeper.h"
 #include <QTimer>
 
+
+/*!
+ * \brief Cette classe est un QWidget graphique servant à afficher l'automate cellulaire actif,
+ * et faisant donc le lien entre toute la partie graphique et la partie automates cellulaires,
+ * grâce à son attribut autoCell
+ */
 class RenderArea : public QWidget
 {
     Q_OBJECT

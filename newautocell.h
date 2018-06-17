@@ -7,7 +7,10 @@
 namespace Ui {
 class NewAutoCell;
 }
-
+/*!
+ * \brief Cette classe est une fenêtre de dialogue servant à créer de nouveaux automates cellulaires
+ * et à choisir leurs configuration (taille, nombre de voisins...etc)
+ */
 class NewAutoCell : public QDialog
 {
     Q_OBJECT

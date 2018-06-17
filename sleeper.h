@@ -2,6 +2,9 @@
 #define SLEEPER_H
 #include <QThread>
 
+/*!
+ * \brief Cette classe est utilisée pour attendre un certain temps entre deux générations
+ */
 class Sleeper : public QThread
 {
 public:

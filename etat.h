@@ -3,6 +3,9 @@
 #define ETAT_H
 
 
+/*!
+ * \brief Cette classe est une classe servant à stocker la matrice d'un automate cellulaire.
+ */
 class Etat
 {
 	/*!

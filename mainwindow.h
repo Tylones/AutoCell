@@ -13,7 +13,7 @@ class MainWindow;
 }
 
 /*!
- * \brief La classe MainWindow
+ * \brief Cette classe est la fenêtre principale de l'application
  */
 class MainWindow : public QMainWindow
 {

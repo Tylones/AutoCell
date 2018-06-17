@@ -9,6 +9,10 @@
 
 
 namespace Ui {
+/*!
+ * \brief Cette classe est une fenêtre de dialogue servant à parcourir des fichiers pour charger des
+ * automates cellulaires / configurations stockés dans des fichiers XML
+ */
 class OpenAutoCell;
 }
 
