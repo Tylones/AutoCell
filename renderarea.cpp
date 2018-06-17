@@ -31,7 +31,6 @@ void RenderArea::drawAutoCell(QPainter &painter)
             double cellWidth= 0;
             cellWidth=(double)width()/(double)(autoCell->getWidth());
             cellHeight=cellWidth;
-			//qDebug() <<  cellHeight << "//::" << cellWidth;
 
 
                  if(autoCell->getCurrentState() * cellHeight > height())
@@ -213,7 +212,6 @@ void RenderArea::mousePressEvent(QMouseEvent* ev)
 			int cellHeight =(height() / (autoCell->getHeight()));
 			int cellWidth =(width() / (autoCell->getWidth()));
 			autoCell->changeCellState(QPoint(ev->pos().x()/cellWidth,ev->pos().y()/cellHeight));
-			//qDebug() << ev->pos().x()/cellWidth << "//" << ev->pos().y()/cellHeight << "//" << zoom;
 			update();
 
 		}

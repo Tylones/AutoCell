@@ -12,6 +12,9 @@ namespace Ui {
 class MainWindow;
 }
 
+/*!
+ * \brief La classe MainWindow
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -28,12 +31,33 @@ protected:
     QSlider *vitesseSlider;
 
 public slots:
+    /*!
+     * \brief mets l'automate en pause
+     */
     void pause();
+    /*!
+     * \brief createNewAutoCell crée un automate cellulaire à partir des données récupérées de la fenêtre NewAutoCell
+     */
     void createNewAutoCell();
+    /*!
+     * \brief openAutoCell ouvre l'automate sélectionné (config+dernier état) dans la fenêtre OpenAutoCell
+     */
     void openAutoCell();
+    /*!
+     * \brief saveAutoCell sauvegarde la configuration de l'automate
+     */
     void saveAutoCell();
+    /*!
+     * \brief saveAutoCellandState sauvegarde la configuration et le dernier état de l'automate
+     */
 	void saveAutoCellandState();
+    /*!
+     * \brief saveAutoCellQuit sauvegarde le contexte de l'application
+     */
 	void saveAutoCellQuit();
+    /*!
+     * \brief openContextAutoCell charge le contexte à l'ouverture
+     */
 	void openContextAutoCell();
 };
 

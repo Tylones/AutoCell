@@ -75,9 +75,7 @@ void MainWindow::createNewAutoCell()
 void MainWindow::openAutoCell(){
 	Xml_Dom dom;
 	dom.readFile(openCellDialog->getFileName());
-	//qDebug(openCellDialog->getFileName().toLatin1());
 	openCellDialog->setFile(&dom);
-	//qDebug() << dom.getNoeud("type");
 	QRegExp reg(".+_plus_state.xml");
 	if(dom.getNoeud("type") == "oneD"){
 		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
@@ -115,7 +113,6 @@ void MainWindow::openAutoCell(){
 		ui->actionprevious->setVisible(true);
 
 	}
-	//qDebug() << renderArea->getAutoCell()->getWidth();
 }
 
 void MainWindow::saveAutoCell(){
@@ -237,8 +234,6 @@ void MainWindow::openContextAutoCell(){
 	}
 	dom.readFile("sauvegarde.xml");
 
-	//qDebug(openCellDialog->getFileName().toLatin1());
-	//qDebug() << dom.getNoeud("type");
 	if(dom.getNoeud("type") == "oneD"){
 		ui->actionprevious->setVisible(true);
 		renderArea->setAutoCell(new OneD(dom.getNoeud("width").toInt(),2,dom.getNoeud("rule").toInt(),3,dom.getNoeud("name")));
@@ -271,7 +266,6 @@ void MainWindow::openContextAutoCell(){
 
 
 	vitesseSlider->setValue(dom.getNoeud("speed").toInt());
-	//qDebug() << renderArea->getAutoCell()->getWidth();
 }
 
 

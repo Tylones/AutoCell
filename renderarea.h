@@ -19,22 +19,51 @@ public:
 
     QSize minimumSizeHint() const override;
     QSize sizeHint() const override;
-	void drawAutoCell(QPainter &painter);
+    /*!
+     * \brief drawAutoCell affiche l'état actuel de l'automate
+     * \param painter - QPainter
+     */
+    void drawAutoCell(QPainter &painter);
 	void drawAutoCell(QPainter &painter,int state);
 
-	AutoCell *getAutoCell() const;
+    AutoCell *getAutoCell() const;
 	void setAutoCell(AutoCell *value);
 
 public slots:
+    /*!
+     * \brief next passe à l'état suivant
+     */
     void next();
+    /*!
+     * \brief changeVitesse change la vitesse d'exécution de l'automate
+     */
     void changeVitesse(int);
+    /*!
+     * \brief previous passe à l'état précédent
+     */
 	void previous();
+    /*!
+     * \brief play lance l'exécution de l'automate
+     */
     void play();
+    /*!
+     * \brief si le bouton play est enclenché, lance play(), sinon arrête le timer
+     * \param checked - booléen vrai si le bouton play est enclenché
+     */
     void playIsChecked(bool checked);
+    /*!
+     * \brief generate_randomly génère un état aléatoire
+     */
 	void generate_randomly();
+    /*!
+     * \brief reinit remet l'automate à zéro
+     */
 	void reinit();
 
 signals:
+    /*!
+      * \brief pause mets l'exécution de l'automate en pause
+      */
      void pause();
 
 

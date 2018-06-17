@@ -19,11 +19,8 @@ class OpenAutoCell : public QDialog
 public:
     explicit OpenAutoCell(QWidget *parent = 0);
     ~OpenAutoCell();
-
     const Xml_Dom &getFile() const;
-
     void setFile(const Xml_Dom *value);
-
     QString getFileName() const;
 public slots:
     void loadFileName();

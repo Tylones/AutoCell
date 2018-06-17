@@ -44,7 +44,6 @@ void QuadLife::nextState()
 			int nextValue = 2;
 			if(value == 2 && willBorn(i,j,etats[currentState%nbMaxEtats])){
 				nextValue = getNextValue(i,j,etats[currentState%nbMaxEtats]);
-//				qDebug() << "CA MARCHE SAOEZPIEA value = " << nextValue;
 			}
 			else if(value !=2 && willBorn(i,j,etats[currentState%nbMaxEtats])){
 				nextValue = value;
@@ -53,7 +52,6 @@ void QuadLife::nextState()
 			else
 				nextValue = 2;
 			etat.setValue(i,j,nextValue);
-			//qDebug() << "i = " << i << "//" << "j = " << j << "value : " << value;
 		}
 	}
 	currentState++;
