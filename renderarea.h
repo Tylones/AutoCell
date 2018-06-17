@@ -70,9 +70,15 @@ signals:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
+	/*!
+	 * \brief autoCell affiché dans le renderArea
+	 */
 	AutoCell *autoCell;
     double zoom;
     QTimer *timer;
+	/*!
+	 * \brief vitesse de générations de nouveaux états lors du "play" pour l'automate affiché
+	 */
     int vitesse;
 
 
